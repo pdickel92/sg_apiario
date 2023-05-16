@@ -1,0 +1,112 @@
+/*estilo body*/
+
+/*ESTRUTURA DO CONTAINER E LINHAS */
+
+/*CONTAINER DISPOSTO DENTRO DA NAVBAR DO TOPO*/
+.container_nav{
+    /*border:3px solid red;*/
+}
+
+.container_logo{
+    background-color: whitesmoke;
+    border: 1px solid red;
+}
+.input_{
+    float:left;
+    width: 50px;
+    border: 1px solid red;
+}
+
+/*estilo menu de navegação botões*/
+.fn{   
+    background-color:#363636;    
+    height: 45px;
+    padding-top: 5px;
+    border-radius: 5px;    
+}
+
+
+/*definições do corpo da página copiado do css principal */
+body {    overflow: hidden; 
+    
+    background-color: whitesmoke;
+    }
+
+.logo{    width: 300px;  
+    background-color: whitesmoke;
+   }
+
+.l1{   }
+
+.l2{ background-color: whitesmoke; /*border:1px solid red;   */ }
+
+.l3{ 
+    background-color: whitesmoke;
+    
+}
+
+
+
+
+.cont{
+/* */
+}
+.linhaTAB{
+    background-color: whitesmoke;
+    overflow-x: auto; /*#DCDCDC;*/
+    
+    
+}
+.ctbotao{
+    padding-bottom: 0px;
+    background-color: #363636;
+    height: 60px;
+}
+.btn-sucess{
+    padding-top:  10px;
+}
+.ct-tabela{
+    height:350px;
+    overflow-y:auto;
+    overflow-x:auto;
+    background-color: whitesmoke;
+    
+    background-color:whitesmoke;
+}
+
+/* DEFINIÇÕES DO LOGOTIPO */
+.col-logo{
+    background-color: whitesmoke;
+    
+    }
+.img{
+    background-color:whitesmoke;
+    /*padding-left: 400px; */
+    
+}
+.linhacad{
+    background-color: #363636;
+    height: auto;
+    padding-top: 3px;
+    /*border:3px solid red;*/
+    
+}
+.botaocad{
+    
+}
+
+@media  screen and (max-width: 768px) {
+    img{
+      width:100%;
+      padding:0%;
+    height:auto;}
+    
+  }
+  .form{
+    width:50px;
+  }
+  .btncad{
+    border:1px solid white;
+  }
+  
+
