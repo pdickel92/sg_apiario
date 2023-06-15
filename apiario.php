@@ -113,7 +113,7 @@ $resultado = mysqli_query($conecta, $exibe_apiario) // $resultado recebe por com
 
 
     <!--CONTAINER TABELA DE DADOS-->
-    <div class="container ct-tabela ">
+    <div class="container" style="min-height: 60px; background: rgba(255, 255, 255, 0.4); border-radius: 20px;">
         <div class="row linhaTAB  dt-responsive table-responsive ">
             <div class="col table-responsive">
                 <table class=" table   ">
