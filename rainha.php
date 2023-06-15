@@ -5,19 +5,15 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title> Raínhas </title>
+    <title> Produções </title>
     <link rel="stylesheet" href="css/estiloCat.css">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous">
-    </script>
-    <link href="css/bootstrap.min.css" rel="stylesheet">
-
-    <!-- CSS DO MAPA DOS APIARIOS-->
-    <style>
-        #map {
-            height: 400px;
-            width: 400px;
-        }
-    </style>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3"
+        crossorigin="anonymous"></script>
+    <!--CSS BOOTSTRAP-->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+    <!--CSS-->
 
 
 </head>
@@ -30,48 +26,72 @@ $resultado = mysqli_query($conecta, $exibe_colmeia) // $resultado recebe por com
 ?>
 
 <body>
-    <!-- MENU DE NAVEGAÇÃO RESPONSIVO-->
+    <?php
+    session_start(); //inicio de sessão
+    if (!isset($_SESSION['USUARIO_LOGIN'])) { // se a sessão USUARIO_LOGIN não for encontrada
+        header("location:index.php"); // redirecionar usuario para index.php
+        session_destroy();
+    }
+    include("config_login.php");
+    ?>
+    <!-- menu de navegação responsivo-->
     <nav class="navbar  bg-dark  navbar-dark">
-        <div class="container container_nav">
+        <div class="container">
 
-            <!--mostrar usuario e data-->
-            <span class="navbar-text">Bem vindo: Fernando
-            </span>
-            <span class="navbar-text">Consulta de Raínhas
+            <div class="d-flex align-items-center">
+                <button class="navbar-toggler me-3" type="button" data-bs-toggle="collapse" data-bs-target="#menu"
+                    style="cursor:pointer"><span class="navbar-toggler-icon"></span>
+                </button>
+                <a href="principal.php" class="ms-auto"> <img src="img/home1.png" width="37px" height="35px"></a>
+            </div>
+            <span class="navbar-text d-flex justify-content-center mx-auto">
+                <text
+                    style="font-family: 'Times New Roman', Times, serif; font-size: 25px; font-weight: bold; color: white;">Produções</text>
             </span>
 
-            <!-------------------------------------BOTÃO QUE ABRE MENU RESPONSIVO  -------------------->
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#menu" style="cursor:pointer">
-                <span class="navbar-toggler-icon">
+            <div class="navbar-text d-flex justify-content-end">
+                <span class="me-3">Bem-vindo:
+                    <?php echo $_SESSION['NOME_USUARIO']; ?>
                 </span>
-            </button>
+                <a href="logoff.php" class="nav-link">Sair</a>
+            </div>
 
-            <!--ITENS DO BOTÃO-->
+            <!--itens do botão-->
             <div class="navbar-collapse collapse" id="menu">
                 <ul class="navbar-nav">
                     <li class="nav-item">
-                        <a class="nav-link" href="logoff.php">Desconectar </a>
+                        <a class="nav-link" href="producao.php">Produções </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="producao.php">Produção </a>
+                        <a class="nav-link" href="tarefas.php">Minhas Tarefas</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="tarefas.php">Tarefas</a>
+                        <a class="nav-link" href="apiario.php">Apiários</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="apiario.php">Apiário</a>
+                        <a class="nav-link" href="colmeia.php">Colméias</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="colmeia.php">Colméia</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="rainha.php">Raínha</a>
+                        <a class="nav-link" href="rainha.php">Raínhas</a>
                     </li>
                 </ul>
-            </div>
-            <!--FINAL ITENS DO BOTÃO RESPONSIVO-->
-        </div>
+                <!--FINAL ITENS DO BOTÃO RESPONSIVO-->
+            </div>    
     </nav>
+    <script>
+        document.addEventListener('click', function (event) {
+            var navbarMenu = document.getElementById('menu');
+            var targetElement = event.target; // Elemento clicado
+
+            // Verifica se o elemento clicado está dentro do menu
+            var isClickedInsideMenu = navbarMenu.contains(targetElement);
+
+            if (!isClickedInsideMenu) {
+                // Remove a classe "show" para recolher o menu
+                navbarMenu.classList.remove('show');
+            }
+        });
+    </script>
 
 
     <!-- INICIO CONTAINER DO LOGO--->
@@ -93,7 +113,7 @@ $resultado = mysqli_query($conecta, $exibe_colmeia) // $resultado recebe por com
 
 
     <!--CONTAINER TABELA DE DADOS-->
-    <div class="container ct-tabela ">
+    <div class="container" style="min-height: 60px; background: rgba(255, 255, 255, 0.4); border-radius: 20px;">
         <div class="row linhaTAB  dt-responsive table-responsive ">
             <div class="col table-responsive">
                 <table class=" table table-striped  ">

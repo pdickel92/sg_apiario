@@ -52,19 +52,19 @@
             <div class="navbar-collapse collapse" id="menu">
                 <ul class="navbar-nav">
                     <li class="nav-item">
-                        <a class="nav-link" href="producao.php">Produção </a>
+                        <a class="nav-link" href="producao.php">Produções </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="tarefas.php">Tarefas</a>
+                        <a class="nav-link" href="tarefas.php">Minhas Tarefas</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="apiario.php">Apiário</a>
+                        <a class="nav-link" href="apiario.php">Apiários</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="colmeia.php">Colméia</a>
+                        <a class="nav-link" href="colmeia.php">Colméias</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="rainha.php">Raínha</a>
+                        <a class="nav-link" href="rainha.php">Raínhas</a>
                     </li>
                 </ul>
                 <!--FINAL ITENS DO BOTÃO RESPONSIVO-->
