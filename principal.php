@@ -14,18 +14,20 @@
     <link rel="stylesheet" href="css/estilo.css">
 
     <!--CSS BOOTSTRAP-->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
 
     <!--JAVA SCRIPT BOOTSTRAP-->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous">
-    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous">
+        </script>
 </head>
 
 <body>
     <?php
-        session_start(); //inicio de sessão
-        if (!isset($_SESSION['USUARIO_LOGIN'])){   // se a sessão USUARIO_LOGIN não for encontrada
-        header("location:index.php");       // redirecionar usuario para index.php
+    session_start(); //inicio de sessão
+    if (!isset($_SESSION['USUARIO_LOGIN'])) { // se a sessão USUARIO_LOGIN não for encontrada
+        header("location:index.php"); // redirecionar usuario para index.php
         session_destroy();
     }
     include("config_login.php");
@@ -36,18 +38,22 @@
         <div class="container">
 
             <div class="d-flex align-items-center">
-                <button class="navbar-toggler me-3" type="button" data-bs-toggle="collapse" data-bs-target="#menu" style="cursor:pointer"><span class="navbar-toggler-icon"></span>
+                <button class="navbar-toggler me-3" type="button" data-bs-toggle="collapse" data-bs-target="#menu"
+                    style="cursor:pointer"><span class="navbar-toggler-icon"></span>
                 </button>
                 <a href="principal.php" class="ms-auto"> <img src="img/home1.png" width="37px" height="35px"></a>
             </div>
             <span class="navbar-text d-flex justify-content-center mx-auto">
-              <text style="font-family: 'Times New Roman', Times, serif; font-size: 25px; font-weight: bold; color: white;">Home</text>
+                <text
+                    style="font-family: 'Times New Roman', Times, serif; font-size: 25px; font-weight: bold; color: white;">Home</text>
             </span>
             <div class="navbar-text d-flex justify-content-end">
-                <span class="me-3">Bem-vindo: <?php echo $_SESSION['NOME_USUARIO'];?></span>
+                <span class="me-3">Bem-vindo:
+                    <?php echo $_SESSION['NOME_USUARIO']; ?>
+                </span>
                 <a href="logoff.php" class="nav-link">Sair</a>
             </div>
-            
+
             <!--itens do botão-->
             <div class="navbar-collapse collapse" id="menu">
                 <ul class="navbar-nav">
@@ -68,26 +74,26 @@
                     </li>
                 </ul>
                 <!--FINAL ITENS DO BOTÃO RESPONSIVO-->
-            </div>    
+            </div>
     </nav>
-            <script>
-                document.addEventListener('click', function(event) {
-                var navbarMenu = document.getElementById('menu');
-                var targetElement = event.target; // Elemento clicado
+    <script>
+        document.addEventListener('click', function (event) {
+            var navbarMenu = document.getElementById('menu');
+            var targetElement = event.target; // Elemento clicado
 
-                // Verifica se o elemento clicado está dentro do menu
-                var isClickedInsideMenu = navbarMenu.contains(targetElement);
+            // Verifica se o elemento clicado está dentro do menu
+            var isClickedInsideMenu = navbarMenu.contains(targetElement);
 
-                if (!isClickedInsideMenu) {
-                    // Remove a classe "show" para recolher o menu
-                    navbarMenu.classList.remove('show');
-                }
-                });
-            </script>
-    
+            if (!isClickedInsideMenu) {
+                // Remove a classe "show" para recolher o menu
+                navbarMenu.classList.remove('show');
+            }
+        });
+    </script>
+
 
     <!-- container que contém todo o conteudo-->
-    <div class="container CONT img-responsive mx-auto align-items-center " >
+    <div class="container CONT img-responsive mx-auto align-items-center ">
 
         <!--linha 01-->
         <div class="row img-responsive mx-auto align-items-center pt-2 ">
@@ -157,28 +163,35 @@
                             <!--PREVISÃO DO TEMPO -->
                             <div class="tempo">
                                 <div id="m-booked-weather-bl250-31359">
-                                    <div class="booked-wzs-250-175 weather-customize" style="background-color:#137AE9;width:160px;" id="width1">
+                                    <div class="booked-wzs-250-175 weather-customize"
+                                        style="background-color:#137AE9;width:160px;" id="width1">
                                         <div class="booked-wzs-250-175_in">
                                             <div class="booked-wzs-250-175-data">
                                                 <div class="booked-wzs-250-175-left-img wrz-18"> </div>
                                                 <div class="booked-wzs-250-175-right">
                                                     <div class="booked-wzs-day-deck">
                                                         <div class="booked-wzs-day-val">
-                                                            <div class="booked-wzs-day-number"><span class="plus">+</span>19</div>
+                                                            <div class="booked-wzs-day-number"><span
+                                                                    class="plus">+</span>19</div>
                                                             <div class="booked-wzs-day-dergee">
                                                                 <div class="booked-wzs-day-dergee-val">&deg;</div>
                                                                 <div class="booked-wzs-day-dergee-name">C</div>
                                                             </div>
                                                         </div>
                                                         <div class="booked-wzs-day">
-                                                            <div class="booked-wzs-day-d">H: <span class="plus">+</span>22&deg;</div>
-                                                            <div class="booked-wzs-day-n">L: <span class="plus">+</span>16&deg;</div>
+                                                            <div class="booked-wzs-day-d">H: <span
+                                                                    class="plus">+</span>22&deg;</div>
+                                                            <div class="booked-wzs-day-n">L: <span
+                                                                    class="plus">+</span>16&deg;</div>
                                                         </div>
                                                     </div>
                                                     <div class="booked-wzs-250-175-info">
                                                         <div class="booked-wzs-250-175-city">Panambi </div>
-                                                        <div class="booked-wzs-250-175-date">Quinta-Feira, 06 Outubro</div>
-                                                        <div class="booked-wzs-left"> <span class="booked-wzs-bottom-l">Ver Previsão de 7 Dias</span> </div>
+                                                        <div class="booked-wzs-250-175-date">Quinta-Feira, 06 Outubro
+                                                        </div>
+                                                        <div class="booked-wzs-left"> <span
+                                                                class="booked-wzs-bottom-l">Ver Previsão de 7
+                                                                Dias</span> </div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -241,7 +254,7 @@
                                     document.getElementsByTagName("head")[0].appendChild(css_file);
 
                                     function setWidgetData_31359(data) {
-                                        if (typeof(data) != 'undefined' && data.results.length > 0) {
+                                        if (typeof (data) != 'undefined' && data.results.length > 0) {
                                             for (var i = 0; i < data.results.length; ++i) {
                                                 var objMainBlock = document.getElementById('m-booked-weather-bl250-31359');
                                                 if (objMainBlock !== null) {
@@ -281,70 +294,75 @@
 
                             $exibe_apiario = "select * from tarefa"; //$busca_CATcaixas recebe o código SQL
                             $resultado = mysqli_query($conecta, $exibe_apiario) // $resultado recebe por comando mysqli_query as variaveis $conecta e $busca_CATcaixas
-                            // função mysqli_query retorna um valor inteiro ou TRUE se a query for bem sucedida ou false se a consulta for considerada ilegal ou não montada coretamente
-                            ?>
+                                // função mysqli_query retorna um valor inteiro ou TRUE se a query for bem sucedida ou false se a consulta for considerada ilegal ou não montada coretamente
+                                ?>
 
                             <!--CONTAINER TABELA DE DADOS-->
                             <div class="container ct-tabela">
-                            <div class="row linhaTAB dt-responsive table-responsive">
-                                <div class="col table-responsive">
-                                    <table class="table table-striped table-bordered table-rounded">
-                                        <thead class="table-dark">
-                                            <tr>
-                                                <th scope="col">Apiário</th>
-                                                <th scope="col">Tarefa</th>
-                                                <th scope="col">Prazo</th>
-                                                <th scope="col">Prioridade</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <?php
-                                            $sql_BUSCA_TAREFA = "SELECT tarefa.*, apiario.DESCRICAO FROM tarefa, apiario WHERE tarefa.COD_APIARIO = apiario.COD_APIARIO";
-                                            $BUSCA_TAREFA = mysqli_query($conecta, $sql_BUSCA_TAREFA);
-                                            while ($linha = mysqli_fetch_array($BUSCA_TAREFA)) {
-                                                $prioridade = $linha['PRIORIDADE'];
-                                                $linhaClass = ($prioridade == 'Alta') ? 'table-danger' : '';
-                                                echo "<tr class='$linhaClass'>";
-                                                echo "<td class='align-middle'>" . $linha['DESCRICAO'] . "</td>";
-                                                echo "<td class='align-middle'>" . $linha['CATEGORIA'] . "</td>";
-                                                echo "<td class='align-middle'>" . $linha['DATA_TAREFA'] . "</td>";
-                                                echo "<td class='align-middle'>" . $linha['PRIORIDADE'] . "</td>";
-                                                echo "</tr>";
-                                            }
-                                            ?>
-                                        </tbody>
-                                    </table>
+                                <div class="row linhaTAB dt-responsive table-responsive">
+                                    <div class="col table-responsive">
+                                        <table class="table table-striped table-bordered table-rounded">
+                                            <thead class="table-dark">
+                                                <tr>
+                                                    <th scope="col">Apiário</th>
+                                                    <th scope="col">Tarefa</th>
+                                                    <th scope="col">Prazo</th>
+                                                    <th scope="col">Prioridade</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <?php
+                                                $sql_BUSCA_TAREFA = "SELECT tarefa.*, apiario.DESCRICAO FROM tarefa, apiario WHERE tarefa.COD_APIARIO = apiario.COD_APIARIO";
+                                                $BUSCA_TAREFA = mysqli_query($conecta, $sql_BUSCA_TAREFA);
+                                                while ($linha = mysqli_fetch_array($BUSCA_TAREFA)) {
+                                                    $prioridade = $linha['PRIORIDADE'];
+                                                    $linhaClass = ($prioridade == 'Alta') ? 'table-danger' : '';
+                                                    echo "<tr class='$linhaClass'>";
+                                                    echo "<td class='align-middle'>" . $linha['DESCRICAO'] . "</td>";
+                                                    echo "<td class='align-middle'>" . $linha['CATEGORIA'] . "</td>";
+                                                    echo "<td class='align-middle'>" . $linha['DATA_TAREFA'] . "</td>";
+                                                    echo "<td class='align-middle'>" . $linha['PRIORIDADE'] . "</td>";
+                                                    echo "</tr>";
+                                                }
+                                                ?>
+                                            </tbody>
+                                        </table>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- Rodapé -->
-                <div class="container">
-                <div class="row fixed-bottom" style="min-height: 60px; background: rgba(0, 0, 0, 0.5);">
-                    <div class="container-fluid">
-                        <div class="row">
-                            <div class="col-2 offset-1 mt-2" style="border-radius: 10px;">
-                                <!-- Logotipo -->
-                                <img src="img/logo2.png" alt="Logotipo" width="100">
-                            </div>
-                            <div class="col-6 text-center mt-2" style="border-radius: 10px;">
-                                <!-- Informações de contato e redes sociais -->
-                                <span>Acompanhe nossas redes sociais! </span>
-                                <a href="https://www.instagram.com" name="Instagram" class="ms-auto" target="_blank"><img src="img/insta.png" width="37px" height="35px"></a>
-                                <a href="https://www.facebook.com" name="Facebook" class="ms-auto" target="_blank"><img src="img/face.png" width="37px" height="35px"></a>
-                                <a href="https://www.twitter.com" name="Twitter" class="ms-auto" target="_blank"><img src="img/twitter.png" width="37px" height="35px"></a>
-                                <a href="https://www.youtube.com" name="Youtube" class="ms-auto" target="_blank"><img src="img/youtube.png" width="37px" height="35px"></a>
-                            </div>
-                                <div class="col-2 offset-1 mt-2" style="border-radius: 10px;">
-                                    <a href="https://wa.me/55991696366?text=Ol%C3%A1%2C%20gostaria%20de%20uma%20ajuda%20em%20rela%C3%A7%C3%A3o%20ao%20software%20de%20gerenciamento%20de%20api%C3%A1rios!" 
-                                    class="btn btn-primary" target="_blank">Chamar Suporte (WhatsApp)</a>
-                                </div>
-                            <div>
                         </div>
                     </div>
                 </div>
             </div>
+
+            <!---CONTAINER ITENS DO RODAPE--->
+            <div class="row fixed-bottom" style="min-height: 60px; background: rgba(0, 0, 0, 0.5);">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-2 offset-1 mt-2" style="border-radius: 10px;">
+                            <!-- Logotipo -->
+                            <img src="img/logo2.png" alt="Logotipo" width="100">
+                        </div>
+                        <div class="col-6 text-center mt-2" style="border-radius: 10px;">
+                            <!-- Informações de contato e redes sociais -->
+                            <span>Acompanhe nossas redes sociais! </span>
+                            <a href="https://www.instagram.com" name="Instagram" class="ms-auto" target="_blank"><img
+                                    src="img/insta.png" width="37px" height="35px"></a>
+                            <a href="https://www.facebook.com" name="Facebook" class="ms-auto" target="_blank"><img
+                                    src="img/face.png" width="37px" height="35px"></a>
+                            <a href="https://www.twitter.com" name="Twitter" class="ms-auto" target="_blank"><img
+                                    src="img/twitter.png" width="37px" height="35px"></a>
+                            <a href="https://www.youtube.com" name="Youtube" class="ms-auto" target="_blank"><img
+                                    src="img/youtube.png" width="37px" height="35px"></a>
+                        </div>
+                        <div class="col-2 offset-1 mt-2" style="border-radius: 10px;">
+                            <a href="https://wa.me/55991696366?text=Ol%C3%A1%2C%20gostaria%20de%20uma%20ajuda%20em%20rela%C3%A7%C3%A3o%20ao%20software%20de%20gerenciamento%20de%20api%C3%A1rios!"
+                                class="btn btn-primary" target="_blank">Chamar Suporte (WhatsApp)</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </body>
 </html>

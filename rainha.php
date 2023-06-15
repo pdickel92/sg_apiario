@@ -46,7 +46,7 @@ $resultado = mysqli_query($conecta, $exibe_colmeia) // $resultado recebe por com
             </div>
             <span class="navbar-text d-flex justify-content-center mx-auto">
                 <text
-                    style="font-family: 'Times New Roman', Times, serif; font-size: 25px; font-weight: bold; color: white;">Produções</text>
+                    style="font-family: 'Times New Roman', Times, serif; font-size: 25px; font-weight: bold; color: white;">Rainhas</text>
             </span>
 
             <div class="navbar-text d-flex justify-content-end">
@@ -105,6 +105,17 @@ $resultado = mysqli_query($conecta, $exibe_colmeia) // $resultado recebe por com
                 <div class="img">
                     <img class="logo" src="img/logo2.png" width="200px;" alt="img"> </img>
                 </div>
+                <!-- Funçoes de adicionar e buscar -->
+                <form class="d-flex img-responsive dt-responsive ml-2" action="" method="get">
+                    <button type="button" class="btn btn-dark btn-sm btcad" data-bs-toggle="modal"
+                        data-bs-target="#CadApiarioModal"> <!--MODAL ADICIONAR--->
+                        Adicionar Tarefa <img src='img/add.png' width='22px' height='22px' class="img-responsive">
+                    </button>
+                    <button type="submit" class="btn btn-primary btn-sm" data-bs-target="#pesquisa"> <!--Pesquisar--->
+                        Buscar <img src='img/lupa.png' width='20px' height='20px' class="img-responsive"></button>
+                    <input class="form-control" name="pesquisar" type="text"
+                        style="width: 100%; background: rgba(255, 255, 255, 0.3);" />
+                </form><br>
             </div>
 
         </div>
@@ -319,33 +330,33 @@ $resultado = mysqli_query($conecta, $exibe_colmeia) // $resultado recebe por com
 
 
 
-<!---CONTAINER ITENS DO RODAPE--->
-<div class="container-fluid ">
-    <div class="row fixed-bottom  linhacad ">
-
-        <!--INICIO DA COLUNA1--->
-        <div class="col-md-2 offset-md-1   ">
-
-            <!--FORMULARIO DE PESQUISA--->
-            <form class="d-flex img-responsive dt-responsive " action="" method="get">
-                <input class="form-control  " name="pesquisar" type="text" />
-                <button type="submit" class="btn btn-primary btn-sm  " data-bs-toggle="modal" data-bs-target="#pesquisa">
-                    Buscar <img src='img/lupa.png' width='20px' height='20px' class=" img-responsive  ">
-                </button>
-            </form>
+    <!---CONTAINER ITENS DO RODAPE--->
+    <div class="row fixed-bottom" style="min-height: 60px; background: rgba(0, 0, 0, 0.5);">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-2 offset-1 mt-2" style="border-radius: 10px;">
+                    <!-- Logotipo -->
+                    <img src="img/logo2.png" alt="Logotipo" width="100">
+                </div>
+                <div class="col-6 text-center mt-2" style="border-radius: 10px;">
+                    <!-- Informações de contato e redes sociais -->
+                    <span>Acompanhe nossas redes sociais! </span>
+                    <a href="https://www.instagram.com" name="Instagram" class="ms-auto" target="_blank"><img
+                            src="img/insta.png" width="37px" height="35px"></a>
+                    <a href="https://www.facebook.com" name="Facebook" class="ms-auto" target="_blank"><img
+                            src="img/face.png" width="37px" height="35px"></a>
+                    <a href="https://www.twitter.com" name="Twitter" class="ms-auto" target="_blank"><img
+                            src="img/twitter.png" width="37px" height="35px"></a>
+                    <a href="https://www.youtube.com" name="Youtube" class="ms-auto" target="_blank"><img
+                            src="img/youtube.png" width="37px" height="35px"></a>
+                </div>
+                <div class="col-2 offset-1 mt-2" style="border-radius: 10px;">
+                    <a href="https://wa.me/55991696366?text=Ol%C3%A1%2C%20gostaria%20de%20uma%20ajuda%20em%20rela%C3%A7%C3%A3o%20ao%20software%20de%20gerenciamento%20de%20api%C3%A1rios!"
+                        class="btn btn-primary" target="_blank">Chamar Suporte (WhatsApp)</a>
+                </div>
+            </div>
         </div>
-
-        <!--INICIO DA COLUNA2--->
-        <div class="col-md-3   ">
-            <button type="button" class="btn  btn-dark btn-sm  btcad " data-bs-toggle="modal" data-bs-target="#CadApiarioModal">
-                Adicionar <img src='img/add.png' width='22px' height='22px' class=" img-responsive ">
-            </button>
-
-        </div>
-
-
     </div>
-</div>
 
 
 <!-- FIM DO CÓDIGO --------------------------------------(ITENS VISIVEIS EM 1 PLANO)--------------------------------------------->

@@ -553,8 +553,6 @@ $resultado = mysqli_query($conecta, $exibe_colmeia) // $resultado recebe por com
                     <a href="https://wa.me/55991696366?text=Ol%C3%A1%2C%20gostaria%20de%20uma%20ajuda%20em%20rela%C3%A7%C3%A3o%20ao%20software%20de%20gerenciamento%20de%20api%C3%A1rios!"
                         class="btn btn-primary" target="_blank">Chamar Suporte (WhatsApp)</a>
                 </div>
-                <div>
-                </div>
             </div>
         </div>
     </div>
