@@ -85,7 +85,7 @@ $resultado = mysqli_query($conecta, $exibe_colmeia) // $resultado recebe por com
                     </li>
                 </ul>
                 <!--FINAL ITENS DO BOTÃO RESPONSIVO-->
-            </div>    
+            </div>
     </nav>
     <script>
         document.addEventListener('click', function (event) {
@@ -102,20 +102,23 @@ $resultado = mysqli_query($conecta, $exibe_colmeia) // $resultado recebe por com
         });
     </script>
 
+
     <!-- INICIO CONTAINER DO LOGO--->
-    <div class="container container-logo" >
+    <div class="container container-logo ">
+
         <!--inicio da linha 1----->
-        <div class="row mx-auto align-items-center l1">
-            <!--Logo grande------>
-            <div class="col-12 mx-auto text-center img-responsive">
-                <div class="img" >
-                    <img class="logo" src="img/logo2.png" width="200px;" alt="img">
+        <div class="row  mx-auto align-items-center l1">
+
+            <!--coluna 1 linha 1------>
+            <div class="col-12  mx-auto text-center img-responsive ">
+                <div class="img">
+                    <img class="logo" src="img/logo2.png" width="200px;" alt="img"> </img>
                 </div>
                 <!-- Funçoes de adicionar e buscar -->
                 <form class="d-flex img-responsive dt-responsive ml-2" action="" method="get">
                     <button type="button" class="btn btn-dark btn-sm btcad" data-bs-toggle="modal"
                         data-bs-target="#CadApiarioModal"> <!--MODAL ADICIONAR--->
-                        Adicionar produção <img src='img/add.png' width='22px' height='22px' class="img-responsive">
+                        Adicionar Tarefa <img src='img/add.png' width='22px' height='22px' class="img-responsive">
                     </button>
                     <button type="submit" class="btn btn-primary btn-sm" data-bs-target="#pesquisa"> <!--Pesquisar--->
                         Buscar <img src='img/lupa.png' width='20px' height='20px' class="img-responsive"></button>
@@ -124,477 +127,693 @@ $resultado = mysqli_query($conecta, $exibe_colmeia) // $resultado recebe por com
                 </form><br>
             </div>
 
+        </div>
+        <!--final da linha 01--->
+    </div>
 
-            <!--CONTAINER TABELA DE DADOS-->
-            <div class="container" style="min-height: 60px; background: rgba(255, 255, 255, 0.4); border-radius: 20px;">
-                <div class="row linhaTAB  dt-responsive table-responsive ">
-                    <div class="col table-responsive">
-                        <table class=" table table-striped">
-                            <thead class="table-dark">
-                                <tr class="table-md ">
-                                    <th scope="col">Descrição</th>
-                                    <th scope="col ">Categoria</th>
-                                    <th scope="col">Data da coleta</th>
-                                    <th scope="col">Quantidade</th>
-                                    <th scope="col">Colmeia</th>
-                                    <th scope="col">Apiário</th>
-                                    <th scope="col">Ações</th>
-                                    <th scope="col">Detalhes</th>
+
+    <!--CONTAINER TABELA DE DADOS-->
+    <div class="container" style="min-height: 60px; background: rgba(255, 255, 255, 0.4); border-radius: 20px;">
+        <div class="row linhaTAB  dt-responsive table-responsive ">
+            <div class="col table-responsive">
+                <table class=" table table-striped  ">
+                    <thead class="table-dark    ">
+                        <tr class="table-md   ">
+                            <th scope="col">Descrição</th>
+                            <th scope="col ">Categoria</th>
+                            <th scope="col">Data da coleta</th>
+                            <th scope="col">Quantidade</th>
+                            <th scope="col">Colmeia</th>
+                            <th scope="col">Apiário</th>
+
+
+                            <th scope="col">Ações</th>
+                            <th scope="col">Detalhes</th>
+
+
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="table-striped ">
+                            <?php
+                            while ($linha = mysqli_fetch_array($resultado)) { ?>
+                                <!--enquanto $linha receber função mysqli_fetch_array ($resultado)-->
+
+                                <td>
+                                    <?php echo $linha['DESCRICAO']; ?>
+                                </td>
+                                <td>
+                                    <?php echo $linha['CATEGORIA']; ?>
+                                </td>
+
+                                <!--CONVERTER DATA PADRÃO BRASILEIRO-->
+                                <?php $DATA = $linha['DATA_COLETA'];
+                                $data_BR = implode("/", array_reverse(explode("-", $DATA)));
+                                $desc_DATA_COLETA = $data_BR;
+                                ?>
+
+                                <td>
+                                    <?php echo $data_BR; ?>
+                                </td>
+                                <td>
+                                    <?php echo $linha['QUANTIDADE']; ?>
+                                </td>
+                                <td>
+                                    <?php echo $linha['colmeia']; ?>
+                                </td>
+                                <td>
+                                    <?php echo $linha['apiario']; ?>
+                                </td>
+
+
+
+                                <td>
+                                    <button type="button" data-bs-toggle="modal" class="btn btn-sm btn-link"
+                                        data-bs-target="#exclusao<?php echo $linha['COD_PRODUCAO']; ?>">
+                                        <img src='img/desligar.png' width='22px' height='22px'>
+                                    </button>
+                                    <button type="button" data-bs-toggle="modal" class="btn btn-sm btn-link "
+                                        data-bs-target="#Edicao<?php echo $linha['COD_PRODUCAO']; ?>">
+                                        <img src='img/editar.png' width='22px' height='22px'>
+                                    </button>
+                                </td>
+                                <td>
+                                    <button type="button" data-bs-toggle="modal" class="btn btn-sm btn-success"
+                                        data-bs-target="#detalhes_AP<?php echo $linha['COD_PRODUCAO']; ?>">
+                                        + detalhes
+                                    </button>
+                                </td>
+
+
+                            </tr>
+
+                            <!-- MODAL EXCLUSÃO-->
+                            <div class="modal" tabindex="-1" role="dialog"
+                                id="exclusao<?php echo $linha['COD_PRODUCAO']; ?>">
+                                <div class="modal-dialog img-responsive" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header justify-content-center bg-danger text-white ">
+                                            <h5 class="modal-title">Confirmar exclusão</h5>
+                                        </div>
+                                        <div class="modal-body bg-light ">
+
+
+                                            <p>Ocultar esse registro: <b>
+                                                    <?php echo $linha['DESCRICAO']; ?>
+                                                </b> ? </p>
+
+                                            <?php $id = $linha['COD_PRODUCAO']; ?>
+
+                                        </div>
+                                        <div class="modal-footer justify-content-center img-responsive ">
+                                            <a href='producao.php'><button type="button"
+                                                    class="btn btn-secondary text-center " data-dismiss="modal">
+                                                    Cancelar
+                                                </button>
+                                            </a>
+                                            <a href="desativa/producao_off.php?COD_PRODUCAO=<?php echo $id ?>"><button
+                                                    type="button" class="btn btn-danger 
+                                        text-center"> Confirma
+                                                </button>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <!-- MODAL EDIÇÃO-->
+                            <div class="modal" tabindex="-1" role="dialog" id="Edicao<?php echo $linha['COD_PRODUCAO']; ?>">
+                                <div class="modal-dialog img-responsive" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header justify-content-center bg-warning text-white ">
+                                            <h5 class="modal-title">Edição de produção</h5>
+                                        </div>
+                                        <div class="modal-body bg-light ">
+
+                                            <div class="col-md-12">
+
+                                                <!--inicio formulario de cadastro-->
+                                                <form class="form-group " method="post" name="cadAPIARIO"
+                                                    action="valida_cad/SALVARcad_PRODUCAO.php">
+
+
+                                                    <!--PRODUTO-->
+                                                    <select class="form-control" name="produto">
+                                                        <option value="selecione" selected>Selecione um produto</option>
+                                                        <option class="prod" value="Mel">Mel (Kg) </option>
+                                                        <option class="prod" value="Própolis">Própolis (Kg) </option>
+                                                        <option class="prod" value="Cera">Cera (Kg) </option>
+                                                        <option class="prod" value="Pólen"> Pólen (Kg)</option>
+                                                        <option class="prod" value="Geléia Real">Geléia Real (Kg) </option>
+                                                        <option class="prod" value="Apitoxina">Apitoxina (Mg)</option>
+                                                        <option class="prod" value="Melato">Melato (Kg) </option>
+                                                        <option class="prod" value="Hidromel">Hidromel (L) </option>
+                                                    </select>
+                                                    <br>
+
+
+
+                                                    <!--Apiario -->
+                                                    <?php
+                                                    $cod_apiario = "select DESCRICAO, COD_APIARIO FROM apiario"; //select recebe o texto 
+                                                    $result = mysqli_query($conecta, $cod_apiario)
+                                                        ?>
+
+                                                    <select class="form-control" name="APIARIO" class="tarefas"
+                                                        width="auto">
+                                                        <option value="" selected>Selecione um Apiário </option>
+                                                        <?php
+                                                        while ($dados = mysqli_fetch_assoc($result)) {
+                                                            ?>
+                                                            <option value="<?php echo $dados['COD_APIARIO'] ?>">
+
+                                                                <?php $pega_AP = $dados['COD_APIARIO']; ?>
+
+                                                                <?php echo $dados['DESCRICAO'] ?>
+                                                            <?php } ?>
+                                                        </option>
+                                                    </select>
+                                                    <br>
+
+                                                    <?php $pega_AP; ?>
+                                                    <!--COLMEIA-->
+                                                    <?php
+                                                    $cod_colmeia = "select DESC_COLMEIA, COD_COLMEIA FROM colmeia "; //select recebe o texto 
+                                                    $result = mysqli_query($conecta, $cod_colmeia)
+                                                        ?>
+
+
+                                                    <select name="colmeia" class="form-control" width="auto">
+                                                        <option value="selecione" selected>Selecione a colméia</option>
+                                                        <?php
+                                                        while ($dados = mysqli_fetch_assoc($result)) {
+                                                            ?>
+                                                            <option value="<?php echo $dados['COD_COLMEIA'] ?>">
+
+                                                                <?php echo $dados['DESC_COLMEIA'] ?>
+                                                            <?php } ?>
+                                                        </option>
+                                                    </select>
+                                                    <br>
+
+                                                    <input type="number" class="form-control" required maxlength="30"
+                                                        name="QTD" placeholder="Quantidade" onfocus="this.value='';" />
+
+
+                                                </form>
+                                            </div>
+
+                                        </div>
+                                        <div class="modal-footer justify-content-center img-responsive ">
+                                            <a href='producao.php'><button type="button"
+                                                    class="btn btn-secondary text-center " data-dismiss="modal">
+                                                    Cancelar
+                                                </button>
+                                            </a>
+                                            <a href="desativa/COLMEIA_off.php?COD_PRODUCAO=<?php echo $id ?>"><button
+                                                    type="button" class="btn btn-warning text-white 
+                                        text-center"> Confirma
+                                                </button>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <!--MODAL MAIS DETALHES DO APIÁRIO --->
+                        <div class="modal   " id="detalhes_AP<?php echo $linha['COD_PRODUCAO']; ?>" tabindex="-1"
+                            aria-labelledby="#" aria-hidden="true">
+                            <div class="modal-dialog   modal_CONS" title="">
+                                <div class="modal-content">
+
+                                    <!--inicio cabeçalho do modal-->
+                                        <div class="modal-header bg-dark text-white ">
+                                            <h5 class="modal-title  ">
+                                                <?php echo "Produção: " . $linha['DESCRICAO']; ?>
+                                            </h5>
+                                            <a href="colmeia.php"> <button type="button" class="close" data-dismiss="modal"
+                                                    aria-label="Fechar">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button> </a>
+                                        </div>
+
+                                        <!--inicio corpo do modal-->
+                                        <div class="modal-body" style="height:380px;">
+                                            <div class="container">
+
+                                                <!--LINHA 01 MODAL-->
+                                                <div class="row" style="height:210px; ">
+                                                    <div class="col-md-10">
+
+                                                        <br>
+
+
+                                                        <br>
+                                                        <hr width="100%">
+                                                        </hr>
+
+                                                    </div>
+                                                </div>
+
+                                                <!--LINHA 02 MODAL-->
+                                                <div class="row " style="background-color:whitesmoke;">
+                                                    <div class="col-md-4" style="background-color:whitesmoke;">
+
+                                                    </div>
+
+                                                    <div class="col-md-4">
+
+                                                        <!--COLUNA QTD TAREFAS DENTRO LINHA 02-->
+                                                        <h6><B>Tarefas </b></h6>
+
+                                                        <!--IMPRIMIR QTD DE RAINHA POR APIÁRIO-->
+                                                        <!--IMPRIMIR QTD DE RAINHA POR APIÁRIO-->
+
+
+                                                    </div>
+
+                                                    <div class="col-md-4" style="background-color:whitesmoke;">
+
+                                                        <!--COLUNA QTD TAREFAS DENTRO LINHA 02-->
+                                                        <h6><B>Tarefas </b></h6>
+
+                                                        <!--IMPRIMIR QTD DE RAINHA POR APIÁRIO-->
+                                                        <!--IMPRIMIR QTD DE RAINHA POR APIÁRIO-->
+
+
+                                                        <img src="img/tarefas.png" width="45px"
+                                                            style="padding-top:15px;"></img>
+                                                        <h6
+                                                            style="color:blue;  font-weight:bold; font-size:60px; float:left; ">
+
+                                                        </h6>
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <!--MODAL LISTAR PRODUÇÃO POR COLMEIA --->
+                        <div class="modal   " id="colmeia_AP<?php echo $linha['COD_PRODUCAO']; ?>" tabindex="-1"
+                            aria-labelledby="#" aria-hidden="true">
+                            <div class="modal-dialog   modal_CONS" title="">
+                                <div class="modal-content">
+
+                                    <!--inicio cabeçalho do modal-->
+                                        <div class="modal-header bg-dark text-white ">
+                                            <h5 class="modal-title  ">
+                                                <?php echo "Produção da colméia" ?>
+                                            </h5>
+                                            <a href="colmeia.php">
+                                                <button type="button" class="close" data-dismiss="modal"
+                                                    aria-label="Fechar">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </a>
+                                        </div>
+
+
+                                        <!--inicio corpo do modal-->
+                                        <div class="modal-body" style='background-color:whitesmoke'>
+                                            <div class=" container">
+                                                <div class="row ">
+                                                    <div class="col md-12 COL1 ">
+                                                        <div clas="col-md-8" style='overflow-x:auto; max-height:300px;'>
+
+                                                            <?php
+                                                            $cod_col = $linha['COD_PRODUCAO'];
+
+                                                            $sql_BUSCA_COLMEIA = "SELECT * FROM producao WHERE COD_COLMEIA = '$cod_col'";
+                                                            $BUSCA_COLMEIA = mysqli_query($conecta, $sql_BUSCA_COLMEIA);
+                                                            while ($teste = mysqli_fetch_array($BUSCA_COLMEIA)) {
+
+                                                                //CONVERTER DATA PADRÃO BRASILEIRO
+                                                                $DATA = $teste['DATA_COLETA'];
+                                                                $data_BR = implode("/", array_reverse(explode("-", $DATA)));
+                                                                $desc_DATA_COLETA = $data_BR;
+
+                                                                //ATRIBUIR VALORES DA BUSCA A VARIAVEIS
+                                                                $desc_PROD = $teste['DESCRICAO'];
+                                                                $desc_CATEGORIA = $teste['CATEGORIA'];
+                                                                $desc_QUANTIDADE = $teste['QUANTIDADE'];
+
+
+                                                                //IMPRIMIR VALORES DA BUSCA
+                                                                echo "<B>Descrição:</B> " . $desc_PROD . "<BR>";
+                                                                echo "<B>Data coleta:</B> " . $data_BR . "<BR>";
+                                                                echo "<B>Categoria:</B> " . $desc_CATEGORIA . "<BR>";
+                                                                echo "<B>Quantidade:</B> " . $desc_QUANTIDADE;
+                                                                echo "<hr width='100%'></hr>";
+                                                            }
+                                                            ?>
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <!--MODAL LISTAR TAREFAS POR APIÁRIO --->
+                        <div class="modal   " id="tarefas_AP<?php echo $linha['COD_PRODUCAO']; ?>" tabindex="-1"
+                            aria-labelledby="#" aria-hidden="true">
+                            <div class="modal-dialog   modal_CONS" title="">
+                                <div class="modal-content">
+
+                                    <!--inicio cabeçalho do modal-->
+                                        <div class="modal-header bg-dark text-white ">
+                                            <h5 class="modal-title  ">
+                                                <?php echo "Colméias do Apiário" ?>
+                                            </h5>
+                                            <a href="apiario.php">
+                                                <button type="button" class="close" data-dismiss="modal"
+                                                    aria-label="Fechar">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </a>
+                                        </div>
+
+
+                                        <!--inicio corpo do modal-->
+                                        <div class="modal-body" style='background-color:whitesmoke'>
+                                            <div class=" container">
+                                                <div class="row ">
+                                                    <div class="col md-12 COL1 ">
+                                                        <div clas="col-md-8" style='overflow-x:auto; max-height:300px;'>
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                </div>
+            </div>
+        </div>
+
+
+    <?php } ?>
+    <!-- encerra o php aberto lá em cima " while ($linha  = mysqli_fetch_array($resultado)) { ?>" -->
+    </tbody>
+    </table>
+
+
+    <!---CONTAINER ITENS DO RODAPE--->
+    <div class="row fixed-bottom" style="min-height: 60px; background: rgba(0, 0, 0, 0.5);">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-2 offset-1 mt-2" style="border-radius: 10px;">
+                    <!-- Logotipo -->
+                    <img src="img/logo2.png" alt="Logotipo" width="100">
+                </div>
+                <div class="col-6 text-center mt-2" style="border-radius: 10px;">
+                    <!-- Informações de contato e redes sociais -->
+                    <span>Acompanhe nossas redes sociais! </span>
+                    <a href="https://www.instagram.com" name="Instagram" class="ms-auto" target="_blank"><img
+                            src="img/insta.png" width="37px" height="35px"></a>
+                    <a href="https://www.facebook.com" name="Facebook" class="ms-auto" target="_blank"><img
+                            src="img/face.png" width="37px" height="35px"></a>
+                    <a href="https://www.twitter.com" name="Twitter" class="ms-auto" target="_blank"><img
+                            src="img/twitter.png" width="37px" height="35px"></a>
+                    <a href="https://www.youtube.com" name="Youtube" class="ms-auto" target="_blank"><img
+                            src="img/youtube.png" width="37px" height="35px"></a>
+                </div>
+                <div class="col-2 offset-1 mt-2" style="border-radius: 10px;">
+                    <a href="https://wa.me/55991696366?text=Ol%C3%A1%2C%20gostaria%20de%20uma%20ajuda%20em%20rela%C3%A7%C3%A3o%20ao%20software%20de%20gerenciamento%20de%20api%C3%A1rios!"
+                        class="btn btn-primary" target="_blank">Chamar Suporte (WhatsApp)</a>
+                </div>
+                <div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- FIM DO CÓDIGO --------------------------------------(ITENS VISIVEIS EM 1 PLANO)--------------------------------------------->
+
+
+    <!--MODAL DE CADASTRO DE PRODUCAO-->
+    <div class="modal fade" id="CadApiarioModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog ">
+            <div class="modal-content ">
+
+                <!--CABEÇALHO-->
+                <div class="modal-header justify-content-center  bg-dark text-white ">
+                    <h5 class="modal-title fs-5" id="exampleModalLabel">Cadastro de produção</h5>
+                </div>
+                <!--CORPO-->
+                <div class="modal-body">
+
+                    <div class="col-md-12">
+
+                        <!--inicio formulario de cadastro-->
+                        <form class="form-group " method="post" name="cadAPIARIO"
+                            action="valida_cad/SALVARcad_PRODUCAO.php">
+
+
+                            <!--PRODUTO-->
+                            <select class="form-control" name="produto">
+                                <option value="selecione" selected>Selecione um produto</option>
+                                <option class="prod" value="Mel">Mel (Kg) </option>
+                                <option class="prod" value="Própolis">Própolis (Kg) </option>
+                                <option class="prod" value="Cera">Cera (Kg) </option>
+                                <option class="prod" value="Pólen"> Pólen (Kg)</option>
+                                <option class="prod" value="Geléia Real">Geléia Real (Kg) </option>
+                                <option class="prod" value="Apitoxina">Apitoxina (Mg)</option>
+                                <option class="prod" value="Melato">Melato (Kg) </option>
+                                <option class="prod" value="Hidromel">Hidromel (L) </option>
+                            </select>
+                            <br>
+
+
+
+                            <!--Apiario -->
+                            <?php
+                            $cod_apiario = "select DESCRICAO, COD_APIARIO FROM apiario"; //select recebe o texto 
+                            $result = mysqli_query($conecta, $cod_apiario)
+                                ?>
+
+                            <select class="form-control" name="APIARIO" class="tarefas" width="auto">
+                                <option value="" selected>Selecione um Apiário </option>
+                                <?php
+                                while ($dados = mysqli_fetch_assoc($result)) {
+                                    ?>
+                                    <option value="<?php echo $dados['COD_APIARIO'] ?>">
+
+                                        <?php $pega_AP = $dados['COD_APIARIO']; ?>
+
+                                        <?php echo $dados['DESCRICAO'] ?>
+                                    <?php } ?>
+                                </option>
+                            </select>
+                            <br>
+
+                            <?php $pega_AP; ?>
+                            <!--COLMEIA-->
+                            <?php
+                            $cod_colmeia = "select DESC_COLMEIA, COD_COLMEIA FROM colmeia "; //select recebe o texto 
+                            $result = mysqli_query($conecta, $cod_colmeia)
+                                ?>
+
+
+                            <select name="colmeia" class="form-control" width="auto">
+                                <option value="selecione" selected>Selecione a colméia</option>
+                                <?php
+                                while ($dados = mysqli_fetch_assoc($result)) {
+                                    ?>
+                                    <option value="<?php echo $dados['COD_COLMEIA'] ?>">
+
+                                        <?php echo $dados['DESC_COLMEIA'] ?>
+                                    <?php } ?>
+                                </option>
+                            </select>
+                            <br>
+
+                            <input type="number" class="form-control" required maxlength="30" name="QTD"
+                                placeholder="Quantidade" onfocus="this.value='';" />
+                            <br>
+                            <br>
+                            <a href="producao.php"><button type="button" class="btn btn-secondary">Cancelar</button></a>
+                            <button type="submit" class="btn btn-primary" name="enviar">Adicionar</button>
+
+                        </form>
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!--MODAL RESULTADO DA CONSULTA --->
+    <div class=" modal  " id="pesquisa" tabindex="-1" aria-labelledby="#" aria-hidden="true">
+        <div class="modal-dialog modal-lg   ">
+            <div class="modal-content ">
+
+                <!--inicio cabeçalho do modal-->
+                <div class="modal-header justify-content-center">
+                    <h4 class="modal-title fs-5" id="#">Tela de consulta</h4>
+                </div>
+
+                <!--inicio corpo do modal-->
+                <div class="conteiner-fluid">
+                    <div class="modal-body  ">
+                        <table class="table table-striped ">
+                            <thead class="table-dark ">
+                                <tr table>
+                                    <th scope="col ">Descrição</th>
+                                    <th scope="col ">Responsável</th>
+                                    <th scope="col ">Situação</th>
+                                    <th scope="col ">Ativação</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr class="table-striped ">
+                                <tr class="table-striped">
+
                                     <?php
-                                    while ($linha = mysqli_fetch_array($resultado)) { ?>
-                                        <!--enquanto $linha receber função mysqli_fetch_array ($resultado)-->
+
+                                    if (isset($_GET['pesquisar'])) {
+                                        //$pesquisar = $_GET['pesquisar'];
+                                    }
+                                    //echo $teste;
+                                    $pesquisar = $_GET['pesquisar'];
+                                    $pesquisar;
+                                    $result = $SQL = "SELECT * FROM apiario WHERE DESCRICAO LIKE '%$pesquisar%' 
+                                        OR RESPONSAVEL LIKE '%$pesquisar%' OR 'LOCAL' LIKE '%$pesquisar%'";
+                                    $resultado_apiario = mysqli_query($conecta, $result);
+
+                                    while ($linha = mysqli_fetch_array($resultado_apiario)) { ?>
+
 
                                         <td>
                                             <?php echo $linha['DESCRICAO']; ?>
                                         </td>
                                         <td>
-                                            <?php echo $linha['CATEGORIA']; ?>
+                                            <?php echo $linha['RESPONSAVEL']; ?>
                                         </td>
-
-                                        <!--CONVERTER DATA PADRÃO BRASILEIRO-->
-                                        <?php $DATA = $linha['DATA_COLETA'];
+                                        <td>
+                                            <?php echo $linha['SITUACAO']; ?>
+                                        </td>
+                                        <?php
+                                        $DATA = $linha['DATA_ATIVO'];
                                         $data_BR = implode("/", array_reverse(explode("-", $DATA)));
-                                        $desc_DATA_COLETA = $data_BR;
                                         ?>
                                         <td>
                                             <?php echo $data_BR; ?>
                                         </td>
-                                        <td>
-                                            <?php echo $linha['QUANTIDADE']; ?>
-                                        </td>
-                                        <td>
-                                            <?php echo $linha['colmeia']; ?>
-                                        </td>
-                                        <td>
-                                            <?php echo $linha['apiario']; ?>
-                                        </td>
-                                        <td>
-                                            <button type="button" data-bs-toggle="modal" class="btn btn-sm btn-link"
-                                                data-bs-target="#exclusao<?php echo $linha['COD_PRODUCAO']; ?>">
-                                                <img src='img/desligar.png' width='22px' height='22px'>
-                                            </button>
-                                            <button type="button" data-bs-toggle="modal" class="btn btn-sm btn-link "
-                                                data-bs-target="#Edicao<?php echo $linha['COD_PRODUCAO']; ?>">
-                                                <img src='img/editar.png' width='22px' height='22px'>
-                                            </button>
-                                        </td>
-                                        <td>
-                                            <button type="button" data-bs-toggle="modal" class="btn btn-sm btn-success"
-                                                data-bs-target="#detalhes_AP<?php echo $linha['COD_PRODUCAO']; ?>">
-                                                + detalhes
-                                            </button>
-                                        </td>
                                     </tr>
-
-                                    <!-- MODAL EXCLUSÃO-->
-                                    <div class="modal" tabindex="-1" role="dialog"
-                                        id="exclusao<?php echo $linha['COD_PRODUCAO']; ?>">
-                                        <div class="modal-dialog img-responsive" role="document">
-                                            <div class="modal-content">
-                                                <div class="modal-header justify-content-center bg-danger text-white ">
-                                                    <h5 class="modal-title">Confirmar exclusão</h5>
-                                                </div>
-                                                <div class="modal-body bg-light ">
-
-
-                                                    <p>Deletar esse registro: <b>
-                                                            <?php echo $linha['DESCRICAO']; ?>
-                                                        </b> ? </p>
-
-                                                    <?php $id = $linha['COD_PRODUCAO']; ?>
-
-                                                </div>
-                                                <div class="modal-footer justify-content-center img-responsive ">
-                                                    <a href='producao.php'><button type="button"
-                                                            class="btn btn-secondary text-center " data-dismiss="modal">
-                                                            Cancelar
-                                                        </button>
-                                                    </a>
-                                                    <a href="desativa/producao_off.php?COD_PRODUCAO=<?php echo $id ?>"><button
-                                                            type="button" class="btn btn-danger text-center"> Confirma
-                                                        </button>
-                                                    </a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-
-                                    <!-- MODAL EDIÇÃO-->
-                                    <div class="modal" tabindex="-1" role="dialog"
-                                        id="Edicao<?php echo $linha['COD_PRODUCAO']; ?>">
-                                        <div class="modal-dialog img-responsive" role="document">
-                                            <div class="modal-content">
-                                                <div class="modal-header justify-content-center bg-warning text-white ">
-                                                    <h5 class="modal-title">Edição de produção</h5>
-                                                </div>
-                                                <div class="modal-body bg-light ">
-
-                                                    <div class="col-md-12">
-
-                                                        <!--inicio formulario de cadastro-->
-                                                        <form class="form-group " method="post" name="cadAPIARIO"
-                                                            action="valida_cad/SALVARcad_PRODUCAO.php">
-
-
-                                                            <!--PRODUTO-->
-                                                            <select class="form-control" name="produto">
-                                                                <option value="selecione" selected>Selecione um produto
-                                                                </option>
-                                                                <option class="prod" value="Mel">Mel (Kg) </option>
-                                                                <option class="prod" value="Própolis">Própolis (Kg)
-                                                                </option>
-                                                                <option class="prod" value="Cera">Cera (Kg) </option>
-                                                                <option class="prod" value="Pólen"> Pólen (Kg)</option>
-                                                                <option class="prod" value="Geléia Real">Geléia Real (Kg)
-                                                                </option>
-                                                                <option class="prod" value="Apitoxina">Apitoxina (Mg)
-                                                                </option>
-                                                                <option class="prod" value="Melato">Melato (Kg) </option>
-                                                            </select>
-                                                            <br>
-
-                                                            <!--Apiario -->
-                                                            <?php
-                                                            $cod_apiario = "select DESCRICAO, COD_APIARIO FROM apiario"; //select recebe o texto 
-                                                            $result = mysqli_query($conecta, $cod_apiario)
-                                                                ?>
-
-                                                            <select class="form-control" name="APIARIO" class="tarefas"
-                                                                width="auto">
-                                                                <option value="" selected>Selecione um Apiário </option>
-                                                                <?php
-                                                                while ($dados = mysqli_fetch_assoc($result)) {
-                                                                    ?>
-                                                                    <option value="<?php echo $dados['COD_APIARIO'] ?>">
-
-                                                                        <?php $pega_AP = $dados['COD_APIARIO']; ?>
-
-                                                                        <?php echo $dados['DESCRICAO'] ?>
-                                                                    <?php } ?>
-                                                                </option>
-                                                            </select>
-                                                            <br>
-
-                                                            <?php $pega_AP; ?>
-                                                            <!--COLMEIA-->
-                                                            <?php
-                                                            $cod_colmeia = "select DESC_COLMEIA, COD_COLMEIA FROM colmeia "; //select recebe o texto 
-                                                            $result = mysqli_query($conecta, $cod_colmeia)
-                                                                ?>
-
-
-                                                            <select name="colmeia" class="form-control" width="auto">
-                                                                <option value="selecione" selected>Selecione a colméia
-                                                                </option>
-                                                                <?php
-                                                                while ($dados = mysqli_fetch_assoc($result)) {
-                                                                    ?>
-                                                                    <option value="<?php echo $dados['COD_COLMEIA'] ?>">
-
-                                                                        <?php echo $dados['DESC_COLMEIA'] ?>
-                                                                    <?php } ?>
-                                                                </option>
-                                                            </select>
-                                                            <br>
-                                                            <input type="number" class="form-control" required
-                                                                maxlength="30" name="QTD" placeholder="Quantidade"
-                                                                onfocus="this.value='';" />
-                                                        </form>
-                                                    </div>
-                                                </div>
-                                                <div class="modal-footer justify-content-center img-responsive ">
-                                                    <a href='producao.php'><button type="button"
-                                                            class="btn btn-secondary text-center " data-dismiss="modal">
-                                                            Cancelar
-                                                        </button>
-                                                    </a>
-                                                    <a href="desativa/COLMEIA_off.php?COD_PRODUCAO=<?php echo $id ?>"><button
-                                                            type="button" class="btn btn-warning text-white 
-                                            text-center"> Confirma
-                                                        </button>
-                                                    </a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <!--MODAL MAIS DETALHES DO APIÁRIO --->
-                                <div class="modal   " id="detalhes_AP<?php echo $linha['COD_PRODUCAO']; ?>"
-                                    tabindex="-1" aria-labelledby="#" aria-hidden="true">
-                                    <div class="modal-dialog   modal_CONS" title="">
-                                        <div class="modal-content">
-
-                                            <!--inicio cabeçalho do modal-->
-                                                <div class="modal-header bg-dark text-white ">
-                                                    <h5 class="modal-title  ">
-                                                        <?php echo "Produção: " . $linha['DESCRICAO']; ?>
-                                                    </h5>
-                                                    <a href="producao.php"> <button type="button" class="close"
-                                                            data-dismiss="modal" aria-label="Fechar">
-                                                            <span aria-hidden="true">&times;</span>
-                                                        </button> </a>
-                                                </div>
-
-                                                <!--inicio corpo do modal-->
-                                                <div class="modal-body" style="height:380px;">
-                                                    <div class="container">
-
-                                                        <!--LINHA 01 MODAL-->
-                                                        <div class="row" style="height:210px; ">
-                                                            <div class="col-md-10">
-                                                                <br>
-                                                                <br>
-                                                                <hr width="100%">
-                                                                </hr>
-                                                            </div>
-                                                        </div>
-
-                                                        <!--LINHA 02 MODAL-->
-                                                        <div class="row " style="background-color:whitesmoke;">
-                                                            <div class="col-md-4" style="background-color:whitesmoke;">
-                                                            </div>
-                                                            <div class="col-md-4">
-
-                                                                <!--COLUNA QTD TAREFAS DENTRO LINHA 02-->
-                                                                <h6><B>Tarefas </b></h6>
-
-                                                                <!--IMPRIMIR QTD DE RAINHA POR APIÁRIO-->
-                                                            </div>
-                                                            <div class="col-md-4" style="background-color:whitesmoke;">
-
-                                                                <!--COLUNA QTD TAREFAS DENTRO LINHA 02-->
-                                                                <h6><B>Tarefas </b></h6>
-
-                                                                <!--IMPRIMIR QTD DE RAINHA POR APIÁRIO-->
-
-                                                                <img src="img/tarefas.png" width="45px"
-                                                                    style="padding-top:15px;"></img>
-                                                                <h6
-                                                                    style="color:blue;  font-weight:bold; font-size:60px; float:left; ">
-                                                                </h6>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <!--MODAL LISTAR PRODUÇÃO POR COLMEIA --->
-                                <div class="modal   " id="colmeia_AP<?php echo $linha['COD_PRODUCAO']; ?>" tabindex="-1"
-                                    aria-labelledby="#" aria-hidden="true">
-                                    <div class="modal-dialog   modal_CONS" title="">
-                                        <div class="modal-content">
-
-                                            <!--inicio cabeçalho do modal-->
-                                                <div class="modal-header bg-dark text-white ">
-                                                    <h5 class="modal-title  ">
-                                                        <?php echo "Produção da colméia" ?>
-                                                    </h5>
-                                                    <a href="colmeia.php">
-                                                        <button type="button" class="close" data-dismiss="modal"
-                                                            aria-label="Fechar">
-                                                            <span aria-hidden="true">&times;</span>
-                                                        </button>
-                                                    </a>
-                                                </div>
-
-                                                <!--inicio corpo do modal-->
-                                                <div class="modal-body" style='background-color:whitesmoke'>
-                                                    <div class=" container">
-                                                        <div class="row ">
-                                                            <div class="col md-12 COL1 ">
-                                                                <div clas="col-md-8"
-                                                                    style='overflow-x:auto; max-height:300px;'>
-                                                                    <?php
-                                                                    $cod_col = $linha['COD_PRODUCAO'];
-                                                                    $sql_BUSCA_COLMEIA = "SELECT * FROM producao WHERE COD_COLMEIA = '$cod_col'";
-                                                                    $BUSCA_COLMEIA = mysqli_query($conecta, $sql_BUSCA_COLMEIA);
-                                                                    while ($teste = mysqli_fetch_array($BUSCA_COLMEIA)) {
-
-                                                                        //CONVERTER DATA PADRÃO BRASILEIRO
-                                                                        $DATA = $teste['DATA_COLETA'];
-                                                                        $data_BR = implode("/", array_reverse(explode("-", $DATA)));
-                                                                        $desc_DATA_COLETA = $data_BR;
-
-                                                                        //ATRIBUIR VALORES DA BUSCA A VARIAVEIS
-                                                                        $desc_PROD = $teste['DESCRICAO'];
-                                                                        $desc_CATEGORIA = $teste['CATEGORIA'];
-                                                                        $desc_QUANTIDADE = $teste['QUANTIDADE'];
-
-                                                                        //IMPRIMIR VALORES DA BUSCA
-                                                                        echo "<B>Descrição:</B> " . $desc_PROD . "<BR>";
-                                                                        echo "<B>Data coleta:</B> " . $data_BR . "<BR>";
-                                                                        echo "<B>Categoria:</B> " . $desc_CATEGORIA . "<BR>";
-                                                                        echo "<B>Quantidade:</B> " . $desc_QUANTIDADE + "Kg";
-                                                                        echo "<hr width='100%'></hr>";
-                                                                    }
-                                                                    ?>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <!--MODAL LISTAR TAREFAS POR APIÁRIO --->
-                                <div class="modal   " id="tarefas_AP<?php echo $linha['COD_PRODUCAO']; ?>" tabindex="-1"
-                                    aria-labelledby="#" aria-hidden="true">
-                                    <div class="modal-dialog   modal_CONS" title="">
-                                        <div class="modal-content">
-
-                                            <!--inicio cabeçalho do modal-->
-                                                <div class="modal-header bg-dark text-white ">
-                                                    <h5 class="modal-title  ">
-                                                        <?php echo "Colméias do Apiário" ?>
-                                                    </h5>
-                                                    <a href="apiario.php">
-                                                        <button type="button" class="close" data-dismiss="modal"
-                                                            aria-label="Fechar">
-                                                            <span aria-hidden="true">&times;</span>
-                                                        </button>
-                                                    </a>
-                                                </div>
-                                                <!--inicio corpo do modal-->
-                                                <div class="modal-body" style='background-color:white'>
-                                                    <div class=" container">
-                                                        <div class="row ">
-                                                            <div class="col md-12 COL1 ">
-                                                                <div clas="col-md-8"
-                                                                    style='overflow-x:auto; max-height:300px;'>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                        </div>
-
-                        <!-- Rodapé -->
-                        <div class="container">
-                            <div class="row fixed-bottom custom-rodape">
-                                <div class="container-fluid">
-                                    <div class="row">
-                                        <div class="col-2 offset-1 mt-2" style="border-radius: 10px;">
-                                            <!-- Logotipo -->
-                                            <img src="img/logo2.png" alt="Logotipo" width="100">
-                                        </div>
-                                        <div class="col-6 text-center mt-2" style="border-radius: 10px;">
-                                            <!-- Informações de contato e redes sociais -->
-                                            <span>Acompanhe nossas redes sociais! </span>
-                                            <a href="https://www.instagram.com" name="Instagram" class="ms-auto"
-                                                target="_blank"><img src="img/insta.png" width="37px" height="35px"></a>
-                                            <a href="https://www.facebook.com" name="Facebook" class="ms-auto"
-                                                target="_blank"><img src="img/face.png" width="37px" height="35px"></a>
-                                            <a href="https://www.twitter.com" name="Twitter" class="ms-auto"
-                                                target="_blank"><img src="img/twitter.png" width="37px" height="35px"></a>
-                                            <a href="https://www.youtube.com" name="Youtube" class="ms-auto"
-                                                target="_blank"><img src="img/youtube.png" width="37px" height="35px"></a>
-                                        </div>
-                                        <div class="col-2 offset-1 mt-2" style="border-radius: 10px;"> <!-- WhatsApp -->
-                                            <a href="https://wa.me/55991696366?text=Ol%C3%A1%2C%20gostaria%20de%20uma%20ajuda%20em%20rela%C3%A7%C3%A3o%20ao%20software%20de%20gerenciamento%20de%20api%C3%A1rios!"
-                                                class="btn btn-primary" target="_blank">Chamar Suporte (WhatsApp)</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-    </body>
-    </html>
-<?php } ?>
-
-<!-- FIM DO CÓDIGO --------------------------------------(ITENS VISIVEIS EM 1 PLANO)--------------------------------------------->
-
-<!--MODAL DE CADASTRO DE PRODUCAO-->
-
-<div class="modal fade" id="CadApiarioModal" tabindex="-1"
-    aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog ">
-        <div class="modal-content ">
-
-            <!--CABEÇALHO-->
-            <div class="modal-header justify-content-center  bg-dark text-white ">
-                <h5 class="modal-title fs-5" id="exampleModalLabel">Cadastro de produção</h5>
-            </div>
-            <!--CORPO-->
-            <div class="modal-body">
-
-                <div class="col-md-12">
-
-                    <!--inicio formulario de cadastro-->
-                    <form class="form-group " method="post" name="cadAPIARIO"
-                        action="valida_cad/SALVARcad_PRODUCAO.php">
-
-
-                        <!--PRODUTO-->
-                        <select class="form-control" name="produto">
-                            <option value="selecione" selected>Selecione um produto</option>
-                            <option class="prod" value="Mel">Mel (Kg) </option>
-                            <option class="prod" value="Própolis">Própolis (Kg) </option>
-                            <option class="prod" value="Cera">Cera (Kg) </option>
-                            <option class="prod" value="Pólen"> Pólen (Kg)</option>
-                            <option class="prod" value="Geléia Real">Geléia Real (Kg) </option>
-                            <option class="prod" value="Apitoxina">Apitoxina (Mg)</option>
-                            <option class="prod" value="Melato">Melato (Kg) </option>
-                            <option class="prod" value="Hidromel">Hidromel (L) </option>
-                        </select>
-                        <br>
-
-                        <!--Apiario -->
-                        <?php
-                        $cod_apiario = "select DESCRICAO, COD_APIARIO FROM apiario"; //select recebe o texto 
-                        $result = mysqli_query($conecta, $cod_apiario)
-                            ?>
-                        <select class="form-control" name="APIARIO" class="tarefas" width="auto">
-                            <option value="" selected>Selecione um Apiário </option>
-                            <?php
-                            while ($dados = mysqli_fetch_assoc($result)) {
-                                ?>
-                                <option value="<?php echo $dados['COD_APIARIO'] ?>">
-                                    <?php $pega_AP = $dados['COD_APIARIO']; ?>
-                                    <?php echo $dados['DESCRICAO'] ?>
                                 <?php } ?>
-                            </option>
-                        </select>
-                        <br>
-                        <?php $pega_AP; ?>
-                        <!--COLMEIA-->
-                        <?php
-                        $cod_colmeia = "select DESC_COLMEIA, COD_COLMEIA FROM colmeia "; //select recebe o texto 
-                        $result = mysqli_query($conecta, $cod_colmeia)
-                            ?>
-                        <select name="colmeia" class="form-control" width="auto">
-                            <option value="selecione" selected>Selecione a colméia</option>
-                            <?php
-                            while ($dados = mysqli_fetch_assoc($result)) {
-                                ?>
-                                <option value="<?php echo $dados['COD_COLMEIA'] ?>">
+                            </tbody>
 
-                                    <?php echo $dados['DESC_COLMEIA'] ?>
-                                <?php } ?>
-                            </option>
-                        </select>
-                        <br>
-                        <input type="number" class="form-control" required maxlength="30" name="QTD"
-                            placeholder="Quantidade" onfocus="this.value='';" />
-                        <br>
-                        <br>
-                        <a href="producao.php"><button type="button" class="btn btn-secondary">Cancelar</button></a>
-                        <button type="submit" class="btn btn-primary" name="enviar">Adicionar</button>
-                    </form>
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
+
+
+    <!--MODAL MAPAS-->
+    <div class="modal fade" id="mapas" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg ">
+            <div class="modal-content">
+
+                <!--CABEÇALHO-->
+                <div class="modal-header bg-dark text-white ">
+                    <h5 class="modal-title fs-5 mx-auto " id="exampleModalLabel">Localização dos Apiários</h5>
+                    <a href="apiario.php"> <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
+                            <span aria-hidden="true">&times;</span>
+                        </button> </a>
+                </div>
+                <!--CORPO-->
+                <div class="modal-body">
+                    <div class="col-md-12">
+
+
+                        <!--DIV QUE CONTÉM O MAPA-->
+                        <div id="map">
+                        </div>
+
+                        <script>
+                            function initMap() {
+
+                                //OPÇÕES DO MAPA
+                                var options = {
+                                    zoom: 12,
+                                    center: {
+                                        lat: -28.286786,
+                                        lng: -53.499586
+                                    }
+                                }
+
+                                //NOVO MAPA
+                                var map = new
+                                    google.maps.Map(document.getElementById('map'), options);
+
+                                //ADICIONAR O MARCADOR 1
+                                var marker = new google.maps.Marker({
+                                    position: {
+                                        lat: -28.266741,
+                                        lng: -53.498730
+                                    },
+                                    map: map
+                                });
+
+                                //ADICIONAR O MARCADOR 2
+                                var marker = new google.maps.Marker({
+                                    position: {
+                                        lat: -28.327455,
+                                        lng: -53.519828
+                                    },
+                                    map: map
+                                });
+
+                                //NOVA JANELA DE INFORMAÇÃO DOS MARCADORES
+                                var fritsch = new google.maps.InfoWindow({
+                                    content: '<h2> Descrição marcador </h2>'
+                                });
+
+                                marker.addListener('click', function () {
+                                    info.fritsch.open(map, marker);
+                                });
+
+                                //NOVA JANELA DE INFORMAÇÃO DOS MARCADORES
+                                var fritsch = new google.maps.InfoWindow({
+                                    content: '<h2> Descrição marcador </h2>'
+                                });
+
+                                marker.addListener('click', function () {
+                                    info.fritsch.open(map, marker);
+                                });
+
+                            }
+                        </script>
+
+                        <!-- MINHA CHAVE API MAPS-->
+                        <script async
+                            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAE2VreFC7Urptz-GeKO7bJdEzm546VlDE&callback=initMap">
+                            </script>
+
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
 </body>
+
 </html>

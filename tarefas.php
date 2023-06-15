@@ -29,7 +29,7 @@ WHERE TAR_STATUS = 1;
 "; //$busca_CATcaixas recebe o código SQL
 $resultado = mysqli_query($conecta, $sql_tarefas) // $resultado recebe por comando mysqli_query as variaveis $conecta e $busca_CATcaixas
 // função mysqli_query retorna um valor inteiro ou TRUE se a query for bem sucedida ou false se a consulta for considerada ilegal ou não montada coretamente
-?>
+    ?>
 
 <body>
     <?php
@@ -53,7 +53,8 @@ $resultado = mysqli_query($conecta, $sql_tarefas) // $resultado recebe por coman
             </div>
             <span class="navbar-text d-flex justify-content-center mx-auto">
                 <text
-                    style="font-family: 'Times New Roman', Times, serif; font-size: 25px; font-weight: bold; color: white;">Minhas tarefas</text>
+                    style="font-family: 'Times New Roman', Times, serif; font-size: 25px; font-weight: bold; color: white;">Minhas
+                    tarefas</text>
             </span>
 
             <div class="navbar-text d-flex justify-content-end">
@@ -83,7 +84,7 @@ $resultado = mysqli_query($conecta, $sql_tarefas) // $resultado recebe por coman
                     </li>
                 </ul>
                 <!--FINAL ITENS DO BOTÃO RESPONSIVO-->
-            </div>    
+            </div>
     </nav>
     <script>
         document.addEventListener('click', function (event) {
@@ -112,6 +113,17 @@ $resultado = mysqli_query($conecta, $sql_tarefas) // $resultado recebe por coman
                 <div class="img">
                     <img class="logo" src="img/logo2.png" width="200px;" alt="img"> </img>
                 </div>
+                <!-- Funçoes de adicionar e buscar -->
+                <form class="d-flex img-responsive dt-responsive ml-2" action="" method="get">
+                    <button type="button" class="btn btn-dark btn-sm btcad" data-bs-toggle="modal"
+                        data-bs-target="#CadApiarioModal"> <!--MODAL ADICIONAR--->
+                        Adicionar Tarefa <img src='img/add.png' width='22px' height='22px' class="img-responsive">
+                    </button>
+                    <button type="submit" class="btn btn-primary btn-sm" data-bs-target="#pesquisa"> <!--Pesquisar--->
+                        Buscar <img src='img/lupa.png' width='20px' height='20px' class="img-responsive"></button>
+                    <input class="form-control" name="pesquisar" type="text"
+                        style="width: 100%; background: rgba(255, 255, 255, 0.3);" />
+                </form><br>
             </div>
 
         </div>
@@ -126,7 +138,7 @@ $resultado = mysqli_query($conecta, $sql_tarefas) // $resultado recebe por coman
                 <table class=" table table-striped  ">
                     <thead class="table-dark    ">
                         <tr class="table-md   ">
-                            
+
                             <th scope="col">Categoria</th>
                             <th scope="col">Data</th>
                             <th scope="col">Apiário</th>
@@ -142,105 +154,123 @@ $resultado = mysqli_query($conecta, $sql_tarefas) // $resultado recebe por coman
                     <tbody>
                         <tr class="table-striped ">
                             <?php
-                            while ($linha  = mysqli_fetch_array($resultado)) { ?>
+                            while ($linha = mysqli_fetch_array($resultado)) { ?>
                                 <!--enquanto $linha receber função mysqli_fetch_array ($resultado)-->
 
-                                
-                                <td><?php echo $linha['CATEGORIA']; ?></td>
+
+                                <td>
+                                    <?php echo $linha['CATEGORIA']; ?>
+                                </td>
 
                                 <!--CONVERTER DATA PADRÃO BRASILEIRO-->
                                 <?php $DATA = $linha['DATA_TAREFA'];
                                 $data_BR = implode("/", array_reverse(explode("-", $DATA)));
                                 $desc_DATA_COLETA = $data_BR;
                                 ?>
-                                <td><?php echo $data_BR ?></td>
-                                <td><?php echo $linha['DESCRICAO']; ?></td>
+                                <td>
+                                    <?php echo $data_BR ?>
+                                </td>
+                                <td>
+                                    <?php echo $linha['DESCRICAO']; ?>
+                                </td>
 
 
 
                                 <td>
-                                    <button type="button" data-bs-toggle="modal" class="btn btn-sm btn-link" data-bs-target="#exclusao<?php echo $linha['COD_TAREFA']; ?>">
+                                    <button type="button" data-bs-toggle="modal" class="btn btn-sm btn-link"
+                                        data-bs-target="#exclusao<?php echo $linha['COD_TAREFA']; ?>">
                                         <img src='img/confirma.png' width='22px' height='22px'>
                                     </button>
-                                    <button type="button" data-bs-toggle="modal" class="btn btn-sm btn-link " data-bs-target="#Edicao<?php echo $linha['COD_TAREFA']; ?>">
+                                    <button type="button" data-bs-toggle="modal" class="btn btn-sm btn-link "
+                                        data-bs-target="#Edicao<?php echo $linha['COD_TAREFA']; ?>">
                                         <img src='img/editar.png' width='22px' height='22px'>
                                     </button>
                                 </td>
                                 <td>
-                                    <button type="button" data-bs-toggle="modal" class="btn btn-sm btn-success" data-bs-target="#detalhes_AP<?php echo $linha['COD_TAREFA']; ?>">
+                                    <button type="button" data-bs-toggle="modal" class="btn btn-sm btn-success"
+                                        data-bs-target="#detalhes_AP<?php echo $linha['COD_TAREFA']; ?>">
                                         + detalhes
                                     </button>
                                 </td>
 
 
-                        </tr>
+                            </tr>
 
-                        <!-- MODAL EXCLUSÃO-->
-                        <div class="modal" tabindex="-1" role="dialog" id="exclusao<?php echo $linha['COD_TAREFA']; ?>">
-                            <div class="modal-dialog img-responsive" role="document">
-                                <div class="modal-content">
-                                    <div class="modal-header justify-content-center bg-warning text-white ">
-                                        <h5 class="modal-title">Concluir tarefa?</h5>
-                                    </div>
-                                    <div class="modal-body bg-light ">
+                            <!-- MODAL EXCLUSÃO-->
+                            <div class="modal" tabindex="-1" role="dialog" id="exclusao<?php echo $linha['COD_TAREFA']; ?>">
+                                <div class="modal-dialog img-responsive" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header justify-content-center bg-warning text-white ">
+                                            <h5 class="modal-title">Concluir tarefa?</h5>
+                                        </div>
+                                        <div class="modal-body bg-light ">
 
 
-                                        <p>Finalizou a tarefa: <b><?php echo $linha['CATEGORIA']; ?>
-                                            </b> ? </p>
+                                            <p>Finalizou a tarefa: <b>
+                                                    <?php echo $linha['CATEGORIA']; ?>
+                                                </b> ? </p>
 
-                                        <?php $id = $linha['COD_TAREFA']; ?>
+                                            <?php $id = $linha['COD_TAREFA']; ?>
 
-                                    </div>
-                                    <div class="modal-footer justify-content-center img-responsive ">
-                                        <a href='tarefas.php'><button type="button" class="btn btn-secondary text-center " data-dismiss="modal">
-                                                Cancelar
-                                            </button>
-                                        </a>
-                                        <a href="#?COD_TAREFA=<?php echo $id ?>"><button type="button" class="btn btn-success 
+                                        </div>
+                                        <div class="modal-footer justify-content-center img-responsive ">
+                                            <a href='tarefas.php'><button type="button"
+                                                    class="btn btn-secondary text-center " data-dismiss="modal">
+                                                    Cancelar
+                                                </button>
+                                            </a>
+                                            <a href="#?COD_TAREFA=<?php echo $id ?>"><button type="button" class="btn btn-success 
                                         text-center"> Adicionar registro
-                                            </button>
-                                        </a>
-                                        <a href="desativa/tarefa_off.php?COD_TAREFA=<?php echo $id ?>"><button type="button" class="btn btn-warning 
+                                                </button>
+                                            </a>
+                                            <a href="desativa/tarefa_off.php?COD_TAREFA=<?php echo $id ?>"><button
+                                                    type="button" class="btn btn-warning 
                                         text-center"> Encerrar tarefa
-                                            </button>
-                                        </a>
+                                                </button>
+                                            </a>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
 
 
-                        <!-- MODAL EDIÇÃO-->
-                        <div class="modal" tabindex="-1" role="dialog" id="Edicao<?php echo $linha['COD_TAREFA']; ?>">
-                            <div class="modal-dialog img-responsive" role="document">
-                                <div class="modal-content">
-                                    <div class="modal-header justify-content-center bg-warning text-white ">
-                                        <h5 class="modal-title">Edição de tarefa</h5>
-                                    </div>
-                                    <div class="modal-body bg-light ">
+                            <!-- MODAL EDIÇÃO-->
+                            <div class="modal" tabindex="-1" role="dialog" id="Edicao<?php echo $linha['COD_TAREFA']; ?>">
+                                <div class="modal-dialog img-responsive" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header justify-content-center bg-warning text-white ">
+                                            <h5 class="modal-title">Edição de tarefa</h5>
+                                        </div>
+                                        <div class="modal-body bg-light ">
 
-                                        <div class="col-md-12">
-                                            <!--FORMULARIO-->
-                                            <!----------------------------inicio formulario de cadastro-------------------------->
+                                            <div class="col-md-12">
+                                                <!--FORMULARIO-->
+                                                <!----------------------------inicio formulario de cadastro-------------------------->
 
-                                            <form class="form-group " method="post" name="cadAPIARIO" action="valida_cad/SALVARcad_tarefa.php">
-                                                <input type="hidden" name="status" />
+                                                <form class="form-group " method="post" name="cadAPIARIO"
+                                                    action="valida_cad/SALVARcad_tarefa.php">
+                                                    <input type="hidden" name="status" />
 
-                                                <br><input type="date" class="form-control" required maxlength="50" name="data" value="Data" onfocus="this.value='';" />
+                                                    <br><input type="date" class="form-control" required maxlength="50"
+                                                        name="data" value="Data" onfocus="this.value='';" />
 
-                                                <!----------------------------------CATEGORIA------------------------------------->
+                                                    <!----------------------------------CATEGORIA------------------------------------->
                                                 <br>
-                                                <select class="form-control" name="CATEGORIA" class="tarefas" width="auto">
+                                                <select class="form-control" name="CATEGORIA" class="tarefas"
+                                                    width="auto">
                                                     <option value="" selected> Informe uma categoria</option>
                                                     <option value=""> Geral</option>
                                                     <option value=" Revisão"> Revisão </option>
                                                     <option value="Produção"> Produção</option>
                                                     <option value=" Alimentação"> Alimentação </option>
                                                     <option value="Divisão de Colméia"> Divisão de Colméia</option>
-                                                    <option value=" Transferencia de colméia"> Transferencia de colméia </option>
-                                                    <option value="Transferência de raínha"> Transferência de raínha</option>
+                                                    <option value=" Transferencia de colméia"> Transferencia de colméia
+                                                    </option>
+                                                    <option value="Transferência de raínha"> Transferência de raínha
+                                                    </option>
                                                     <option value=" Troca de Raínha"> Troca de Raínha </option>
-                                                    <option value=" Unificação de Colmeia"> Unificação de Colmeia </option>
+                                                    <option value=" Unificação de Colmeia"> Unificação de Colmeia
+                                                    </option>
                                                     <option value="Visita Técnica"> Visita Técnica</option>
                                                     <option value=" Outro Manejo"> Outro Manejo</option>
                                                 </select>
@@ -257,47 +287,52 @@ $resultado = mysqli_query($conecta, $sql_tarefas) // $resultado recebe por coman
 
                                                 <!----------------------------------APIARIO---------------------------------------->
 
-                                                <?php
-                                                $cod_apiario = "select DESCRICAO, COD_APIARIO FROM apiario"; //select recebe o texto 
-                                                $result = mysqli_query($conecta, $cod_apiario)
-                                                ?>
-
-                                                <br>
-                                                <select class="form-control" name="APIARIO" width="auto">
-                                                    <option value="selecione" selected>Selecione um Apiário</option>
                                                     <?php
-                                                    while ($dados = mysqli_fetch_assoc($result)) {
-                                                    ?>
-                                                        <option value="<?php echo $dados['COD_APIARIO'] ?>">
+                                                    $cod_apiario = "select DESCRICAO, COD_APIARIO FROM apiario"; //select recebe o texto 
+                                                    $result = mysqli_query($conecta, $cod_apiario)
+                                                        ?>
 
-                                                            <?php echo $dados['DESCRICAO'] ?>
-                                                        <?php } ?>
+                                                    <br>
+                                                    <select class="form-control" name="APIARIO" width="auto">
+                                                        <option value="selecione" selected>Selecione um Apiário</option>
+                                                        <?php
+                                                        while ($dados = mysqli_fetch_assoc($result)) {
+                                                            ?>
+                                                            <option value="<?php echo $dados['COD_APIARIO'] ?>">
+
+                                                                <?php echo $dados['DESCRICAO'] ?>
+                                                            <?php } ?>
                                                         </option>
-                                                </select>
-                                                <br>
+                                                    </select>
+                                                    <br>
 
-                                                <!--SELECT ID FROM tabela ORDER BY ID DESC LIMIT1-->
+                                                    <!--SELECT ID FROM tabela ORDER BY ID DESC LIMIT1-->
 
-                                                <!----------------------------------OBSERVAÇÕES------------------------------------->
+                                                    <!----------------------------------OBSERVAÇÕES------------------------------------->
 
                                                 <h6 id="categoria"> Observações </h6>
 
-                                                <textarea class="form-control" name="OBS" rows="5" cols="30" id="area" placeholder="Observações" maxlenght:300>
+                                                <textarea class="form-control" name="OBS" rows="5" cols="30" id="area"
+                                                    placeholder="Observações" maxlenght:300>
                             </textarea>
 
                                                 <br>
-                                                <a href="tarefas.php"><button type="button" class="btn btn-secondary">Cancelar</button></a>
-                                                <button type="submit" class="btn btn-primary" name="enviar">Alterar</button>
+                                                <a href="tarefas.php"><button type="button"
+                                                        class="btn btn-secondary">Cancelar</button></a>
+                                                <button type="submit" class="btn btn-primary"
+                                                    name="enviar">Alterar</button>
                                             </form>
                                         </div>
 
                                     </div>
                                     <div class="modal-footer justify-content-center img-responsive ">
-                                        <a href='tarefas.php'><button type="button" class="btn btn-secondary text-center " data-dismiss="modal">
+                                        <a href='tarefas.php'><button type="button"
+                                                class="btn btn-secondary text-center " data-dismiss="modal">
                                                 Cancelar
                                             </button>
                                         </a>
-                                        <a href="desativa/TAREFA_off.php?COD_TAREFA=<?php echo $id ?>"><button type="button" class="btn btn-warning text-white 
+                                        <a href="desativa/TAREFA_off.php?COD_TAREFA=<?php echo $id ?>"><button
+                                                type="button" class="btn btn-warning text-white 
                                         text-center"> Confirma
                                             </button>
                                         </a>
@@ -308,58 +343,64 @@ $resultado = mysqli_query($conecta, $sql_tarefas) // $resultado recebe por coman
 
 
                         <!--MODAL MAIS DETALHES DA TAREFA --->
-                        <div class="modal   " id="detalhes_AP<?php echo $linha['COD_TAREFA']; ?>" tabindex="-1" aria-labelledby="#" aria-hidden="true">
+                        <div class="modal   " id="detalhes_AP<?php echo $linha['COD_TAREFA']; ?>" tabindex="-1"
+                            aria-labelledby="#" aria-hidden="true">
                             <div class="modal-dialog  modal_CONS" title="">
                                 <div class="modal-content">
 
                                     <!--inicio cabeçalho do modal-->
-                                    <div class="modal-header bg-dark text-white ">
-                                        <h5 class="modal-title  "><?php echo "Tarefa: " . $linha['DESC_TAREFA']; ?>
-                                        </h5>
-                                        <a href="tarefas.php"> <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
-                                                <span aria-hidden="true">&times;</span>
-                                            </button> </a>
-                                    </div>
+                                        <div class="modal-header bg-dark text-white ">
+                                            <h5 class="modal-title  ">
+                                                <?php echo "Tarefa: " . $linha['DESC_TAREFA']; ?>
+                                            </h5>
+                                            <a href="tarefas.php"> <button type="button" class="close" data-dismiss="modal"
+                                                    aria-label="Fechar">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button> </a>
+                                        </div>
 
-                                    <!--inicio corpo do modal-->
-                                    <div class="modal-body" style="height:380px;">
-                                        <div class="container">                                        
-                                                
-                                                    <?php echo "<B>Observações</B>: " . $linha['OBSERVACOES'];
-                                                    ?>                                         
-                                                                                                                                    
+                                        <!--inicio corpo do modal-->
+                                        <div class="modal-body" style="height:380px;">
+                                            <div class="container">
+
+                                                <?php echo "<B>Observações</B>: " . $linha['OBSERVACOES'];
+                                                ?>
+
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
 
 
-                        <!--MODAL LISTAR COLMEIAS POR APIÁRIO --->
-                        <div class="modal   " id="colmeia_AP<?php echo $linha['COD_COLMEIA']; ?>" tabindex="-1" aria-labelledby="#" aria-hidden="true">
+                            <!--MODAL LISTAR COLMEIAS POR APIÁRIO --->
+                        <div class="modal   " id="colmeia_AP<?php echo $linha['COD_COLMEIA']; ?>" tabindex="-1"
+                            aria-labelledby="#" aria-hidden="true">
                             <div class="modal-dialog   modal_CONS" title="">
                                 <div class="modal-content">
 
                                     <!--inicio cabeçalho do modal-->
-                                    <div class="modal-header bg-dark text-white ">
-                                        <h5 class="modal-title  ">
-                                            <?php echo "Colméias do Apiário" ?>
-                                        </h5>
-                                        <a href="apiario.php">
-                                            <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
-                                                <span aria-hidden="true">&times;</span>
-                                            </button>
-                                        </a>
-                                    </div>
+                                        <div class="modal-header bg-dark text-white ">
+                                            <h5 class="modal-title  ">
+                                                <?php echo "Colméias do Apiário" ?>
+                                            </h5>
+                                            <a href="apiario.php">
+                                                <button type="button" class="close" data-dismiss="modal"
+                                                    aria-label="Fechar">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </a>
+                                        </div>
 
 
-                                    <!--inicio corpo do modal-->
-                                    <div class="modal-body" style='background-color:whitesmoke'>
-                                        <div class=" container">
-                                            <div class="row ">
-                                                <div class="col md-12 COL1 ">
-                                                    <div clas="col-md-8" style='overflow-x:auto; max-height:300px;'>
+                                        <!--inicio corpo do modal-->
+                                        <div class="modal-body" style='background-color:whitesmoke'>
+                                            <div class=" container">
+                                                <div class="row ">
+                                                    <div class="col md-12 COL1 ">
+                                                        <div clas="col-md-8" style='overflow-x:auto; max-height:300px;'>
 
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -367,53 +408,55 @@ $resultado = mysqli_query($conecta, $sql_tarefas) // $resultado recebe por coman
                                     </div>
                                 </div>
                             </div>
-                        </div>
 
 
-                        <!--MODAL LISTAR TAREFAS POR APIÁRIO --->
-                        <div class="modal   " id="tarefas_AP<?php echo $linha['COD_COLMEIA']; ?>" tabindex="-1" aria-labelledby="#" aria-hidden="true">
+                            <!--MODAL LISTAR TAREFAS POR APIÁRIO --->
+                        <div class="modal   " id="tarefas_AP<?php echo $linha['COD_COLMEIA']; ?>" tabindex="-1"
+                            aria-labelledby="#" aria-hidden="true">
                             <div class="modal-dialog   modal_CONS" title="">
                                 <div class="modal-content">
 
                                     <!--inicio cabeçalho do modal-->
-                                    <div class="modal-header bg-dark text-white ">
-                                        <h5 class="modal-title  ">
-                                            <?php echo "Colméias do Apiário" ?>
-                                        </h5>
-                                        <a href="apiario.php">
-                                            <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
-                                                <span aria-hidden="true">&times;</span>
-                                            </button>
-                                        </a>
-                                    </div>
+                                        <div class="modal-header bg-dark text-white ">
+                                            <h5 class="modal-title  ">
+                                                <?php echo "Colméias do Apiário" ?>
+                                            </h5>
+                                            <a href="apiario.php">
+                                                <button type="button" class="close" data-dismiss="modal"
+                                                    aria-label="Fechar">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </a>
+                                        </div>
 
 
-                                    <!--inicio corpo do modal-->
-                                    <div class="modal-body" style='background-color:whitesmoke'>
-                                        <div class=" container">
-                                            <div class="row ">
-                                                <div class="col md-12 COL1 ">
-                                                    <div clas="col-md-8" style='overflow-x:auto; max-height:300px;'>
-                                                        <?php
-                                                        $cod_COL = $linha['COD_COLMEIA'];
-                                                        echo $cod_COL;
+                                        <!--inicio corpo do modal-->
+                                        <div class="modal-body" style='background-color:whitesmoke'>
+                                            <div class=" container">
+                                                <div class="row ">
+                                                    <div class="col md-12 COL1 ">
+                                                        <div clas="col-md-8" style='overflow-x:auto; max-height:300px;'>
+                                                            <?php
+                                                            $cod_COL = $linha['COD_COLMEIA'];
+                                                            echo $cod_COL;
 
-                                                        $sql_BUSCA_TAREFA = "SELECT * FROM tarefa WHERE COD_APIARIO = 31";
-                                                        $BUSCA_TAREFA = mysqli_query($conecta, $sql_BUSCA_TAREFA);
-                                                        while ($teste = mysqli_fetch_array($BUSCA_TAREFA)) {
+                                                            $sql_BUSCA_TAREFA = "SELECT * FROM tarefa WHERE COD_APIARIO = 31";
+                                                            $BUSCA_TAREFA = mysqli_query($conecta, $sql_BUSCA_TAREFA);
+                                                            while ($teste = mysqli_fetch_array($BUSCA_TAREFA)) {
 
-                                                            //ATRIBUIR VALORES DA BUSCA A VARIAVEIS
-                                                            $desc_CAT_TAREFA     = $teste['CATEGORIA'];
-                                                            $desc_DATA_TAREFA  = $teste['DATA_TAREFA'];
-                                                            $desc_PRIORIDADE      = $teste['PRIORIDADE'];
+                                                                //ATRIBUIR VALORES DA BUSCA A VARIAVEIS
+                                                                $desc_CAT_TAREFA = $teste['CATEGORIA'];
+                                                                $desc_DATA_TAREFA = $teste['DATA_TAREFA'];
+                                                                $desc_PRIORIDADE = $teste['PRIORIDADE'];
 
-                                                        ?>
-                                                            kkkjIMPRIMIR VALORES DA BUSCA
-                                                            "<B>Categoria:</B> " . $desc_CAT_TAREFA . "<BR>";
+                                                                ?>
+                                                                kkkjIMPRIMIR VALORES DA BUSCA
+                                                                "<B>Categoria:</B> " . $desc_CAT_TAREFA . "<BR>";
 
-                                                        <?php
-                                                        }
-                                                        ?>
+                                                                <?php
+                                                            }
+                                                            ?>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -421,288 +464,301 @@ $resultado = mysqli_query($conecta, $sql_tarefas) // $resultado recebe por coman
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                </div>
+            </div>
+        </div>
+
+
+    <?php } ?>
+    <!-- encerra o php aberto lá em cima " while ($linha  = mysqli_fetch_array($resultado)) { ?>" -->
+    </tbody>
+    </table>
+
+
+
+    <!---CONTAINER ITENS DO RODAPE--->
+    <div class="row fixed-bottom" style="min-height: 60px; background: rgba(0, 0, 0, 0.5);">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-2 offset-1 mt-2" style="border-radius: 10px;">
+                    <!-- Logotipo -->
+                    <img src="img/logo2.png" alt="Logotipo" width="100">
+                </div>
+                <div class="col-6 text-center mt-2" style="border-radius: 10px;">
+                    <!-- Informações de contato e redes sociais -->
+                    <span>Acompanhe nossas redes sociais! </span>
+                    <a href="https://www.instagram.com" name="Instagram" class="ms-auto" target="_blank"><img
+                            src="img/insta.png" width="37px" height="35px"></a>
+                    <a href="https://www.facebook.com" name="Facebook" class="ms-auto" target="_blank"><img
+                            src="img/face.png" width="37px" height="35px"></a>
+                    <a href="https://www.twitter.com" name="Twitter" class="ms-auto" target="_blank"><img
+                            src="img/twitter.png" width="37px" height="35px"></a>
+                    <a href="https://www.youtube.com" name="Youtube" class="ms-auto" target="_blank"><img
+                            src="img/youtube.png" width="37px" height="35px"></a>
+                </div>
+                <div class="col-2 offset-1 mt-2" style="border-radius: 10px;">
+                    <a href="https://wa.me/55991696366?text=Ol%C3%A1%2C%20gostaria%20de%20uma%20ajuda%20em%20rela%C3%A7%C3%A3o%20ao%20software%20de%20gerenciamento%20de%20api%C3%A1rios!"
+                        class="btn btn-primary" target="_blank">Chamar Suporte (WhatsApp)</a>
+                </div>
+                <div>
+                </div>
             </div>
         </div>
     </div>
 
 
-<?php } ?>
-<!-- encerra o php aberto lá em cima " while ($linha  = mysqli_fetch_array($resultado)) { ?>" -->
-</tbody>
-</table>
+    <!-- FIM DO CÓDIGO --------------------------------------(ITENS VISIVEIS EM 1 PLANO)--------------------------------------------->
 
 
+    <!--MODAL DE CADASTRO DE TAREFAS-->
+    <div class="modal fade" id="CadApiarioModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog ">
+            <div class="modal-content ">
 
-<!---CONTAINER ITENS DO RODAPE--->
-<div class="container-fluid ">
-    <div class="row fixed-bottom  linhacad ">
+                <!--CABEÇALHO-->
+                <div class="modal-header justify-content-center  bg-dark text-white ">
+                    <h5 class="modal-title fs-5" id="exampleModalLabel">Cadastro de Tarefas</h5>
+                </div>
+                <!--CORPO-->
+                <div class="modal-body">
 
-        <!--INICIO DA COLUNA1--->
-        <div class="col-md-2 offset-md-1   ">
+                    <div class="col-md-12">
 
-            <!--FORMULARIO DE PESQUISA--->
-            <form class="d-flex img-responsive dt-responsive " action="" method="get">
-                <input class="form-control  " name="pesquisar" type="text" />
-                <button type="submit" class="btn btn-primary btn-sm  " data-bs-toggle="modal" data-bs-target="#pesquisa">
-                    Buscar <img src='img/lupa.png' width='20px' height='20px' class=" img-responsive  ">
-                </button>
-            </form>
-        </div>
+                        <!----------------------------inicio formulario de cadastro-------------------------->
 
-        <!--INICIO DA COLUNA2--->
-        <div class="col-md-3   ">
-            <button type="button" class="btn  btn-dark btn-sm  btcad " data-bs-toggle="modal" data-bs-target="#CadApiarioModal">
-                Adicionar <img src='img/add.png' width='22px' height='22px' class=" img-responsive ">
-            </button>
+                        <form class="form-group " method="post" name="cadAPIARIO"
+                            action="valida_cad/SALVARcad_tarefa.php">
+                            <input type="hidden" name="status" />
 
-        </div>
+                            <br><input type="date" class="form-control" required maxlength="50" name="data" value="Data"
+                                onfocus="this.value='';" />
 
+                            <!----------------------------------CATEGORIA------------------------------------->
+                            <br>
+                            <select class="form-control" name="CATEGORIA" class="tarefas" width="auto">
+                                <option value="" selected> Informe uma categoria</option>
+                                <option value=""> Geral</option>
+                                <option value=" Revisão"> Revisão </option>
+                                <option value="Produção"> Produção</option>
+                                <option value=" Alimentação"> Alimentação </option>
+                                <option value="Divisão de Colméia"> Divisão de Colméia</option>
+                                <option value=" Transferencia de colméia"> Transferencia de colméia </option>
+                                <option value="Transferência de raínha"> Transferência de raínha</option>
+                                <option value=" Troca de Raínha"> Troca de Raínha </option>
+                                <option value=" Unificação de Colmeia"> Unificação de Colmeia </option>
+                                <option value="Visita Técnica"> Visita Técnica</option>
+                                <option value=" Outro Manejo"> Outro Manejo</option>
+                            </select>
 
-    </div>
-</div>
+                            <!----------------------------------PRIORIDADE------------------------------------->
+                            <br>
+                            <select class="form-control" name="prior" width="auto">
+                                <option value="" selected> Informe uma prioridade</option>
+                                <option value="Não definida"> Não definida</option>
+                                <option value=" Baixa"> Baixa </option>
+                                <option value="Média"> Média</option>
+                                <option value="Alta"> Alta</option>
+                            </select>
 
+                            <!----------------------------------APIARIO---------------------------------------->
 
-<!-- FIM DO CÓDIGO --------------------------------------(ITENS VISIVEIS EM 1 PLANO)--------------------------------------------->
-
-
-<!--MODAL DE CADASTRO DE TAREFAS-->
-<div class="modal fade" id="CadApiarioModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog ">
-        <div class="modal-content ">
-
-            <!--CABEÇALHO-->
-            <div class="modal-header justify-content-center  bg-dark text-white ">
-                <h5 class="modal-title fs-5" id="exampleModalLabel">Cadastro de Tarefas</h5>
-            </div>
-            <!--CORPO-->
-            <div class="modal-body">
-
-                <div class="col-md-12">
-
-                    <!----------------------------inicio formulario de cadastro-------------------------->
-
-                    <form class="form-group " method="post" name="cadAPIARIO" action="valida_cad/SALVARcad_tarefa.php">
-                        <input type="hidden" name="status" />
-
-                        <br><input type="date" class="form-control" required maxlength="50" name="data" value="Data" onfocus="this.value='';" />
-
-                        <!----------------------------------CATEGORIA------------------------------------->
-                        <br>
-                        <select class="form-control" name="CATEGORIA" class="tarefas" width="auto">
-                            <option value="" selected> Informe uma categoria</option>
-                            <option value=""> Geral</option>
-                            <option value=" Revisão"> Revisão </option>
-                            <option value="Produção"> Produção</option>
-                            <option value=" Alimentação"> Alimentação </option>
-                            <option value="Divisão de Colméia"> Divisão de Colméia</option>
-                            <option value=" Transferencia de colméia"> Transferencia de colméia </option>
-                            <option value="Transferência de raínha"> Transferência de raínha</option>
-                            <option value=" Troca de Raínha"> Troca de Raínha </option>
-                            <option value=" Unificação de Colmeia"> Unificação de Colmeia </option>
-                            <option value="Visita Técnica"> Visita Técnica</option>
-                            <option value=" Outro Manejo"> Outro Manejo</option>
-                        </select>
-
-                        <!----------------------------------PRIORIDADE------------------------------------->
-                        <br>
-                        <select class="form-control" name="prior" width="auto">
-                            <option value="" selected> Informe uma prioridade</option>
-                            <option value="Não definida"> Não definida</option>
-                            <option value=" Baixa"> Baixa </option>
-                            <option value="Média"> Média</option>
-                            <option value="Alta"> Alta</option>
-                        </select>
-
-                        <!----------------------------------APIARIO---------------------------------------->
-
-                        <?php
-                        $cod_apiario = "select DESCRICAO, COD_APIARIO FROM apiario"; //select recebe o texto 
-                        $result = mysqli_query($conecta, $cod_apiario)
-                        ?>
-
-                        <br>
-                        <select class="form-control" name="APIARIO" width="auto">
-                            <option value="selecione" selected>Selecione um Apiário</option>
                             <?php
-                            while ($dados = mysqli_fetch_assoc($result)) {
-                            ?>
-                                <option value="<?php echo $dados['COD_APIARIO'] ?>">
+                            $cod_apiario = "select DESCRICAO, COD_APIARIO FROM apiario"; //select recebe o texto 
+                            $result = mysqli_query($conecta, $cod_apiario)
+                                ?>
 
-                                    <?php echo $dados['DESCRICAO'] ?>
-                                <?php } ?>
+                            <br>
+                            <select class="form-control" name="APIARIO" width="auto">
+                                <option value="selecione" selected>Selecione um Apiário</option>
+                                <?php
+                                while ($dados = mysqli_fetch_assoc($result)) {
+                                    ?>
+                                    <option value="<?php echo $dados['COD_APIARIO'] ?>">
+
+                                        <?php echo $dados['DESCRICAO'] ?>
+                                    <?php } ?>
                                 </option>
-                        </select>
-                        <br>
+                            </select>
+                            <br>
 
-                        <!--SELECT ID FROM tabela ORDER BY ID DESC LIMIT1-->
+                            <!--SELECT ID FROM tabela ORDER BY ID DESC LIMIT1-->
 
-                        <!----------------------------------OBSERVAÇÕES------------------------------------->
+                            <!----------------------------------OBSERVAÇÕES------------------------------------->
 
-                        <h6 id="categoria"> Observações </h6>
+                            <h6 id="categoria"> Observações </h6>
 
-                        <textarea class="form-control" name="OBS" rows="5" cols="30" id="area" placeholder="Observações" maxlenght:300>
+                            <textarea class="form-control" name="OBS" rows="5" cols="30" id="area"
+                                placeholder="Observações" maxlenght:300>
                             </textarea>
 
-                        <br>
-                        <a href="tarefas.php"><button type="button" class="btn btn-secondary">Cancelar</button></a>
-                        <button type="submit" class="btn btn-primary" name="enviar">Adicionar</button>
-                    </form>
+                            <br>
+                            <a href="tarefas.php"><button type="button" class="btn btn-secondary">Cancelar</button></a>
+                            <button type="submit" class="btn btn-primary" name="enviar">Adicionar</button>
+                        </form>
 
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-
-
-<!--MODAL RESULTADO DA CONSULTA --->
-<div class=" modal  " id="pesquisa" tabindex="-1" aria-labelledby="#" aria-hidden="true">
-    <div class="modal-dialog modal-lg   ">
-        <div class="modal-content ">
-
-            <!--inicio cabeçalho do modal-->
-            <div class="modal-header justify-content-center">
-                <h4 class="modal-title fs-5" id="#">Tela de consulta</h4>
-            </div>
-
-            <!--inicio corpo do modal-->
-            <div class="conteiner-fluid">
-                <div class="modal-body  ">
-                    <table class="table table-striped ">
-                        <thead class="table-dark ">
-                            <tr table>
-                                <th scope="col ">Descrição</th>
-                                <th scope="col ">Responsável</th>
-                                <th scope="col ">Situação</th>
-                                <th scope="col ">Ativação</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr class="table-striped">
-
-                                <?php
-
-                                if (isset($_GET['pesquisar'])) {
-                                    //$pesquisar = $_GET['pesquisar'];
-                                }
-                                //echo $teste;
-                                $pesquisar = $_GET['pesquisar'];
-                                $pesquisar;
-                                $result = $SQL = "SELECT * FROM apiario WHERE DESCRICAO LIKE '%$pesquisar%' 
-                                        OR RESPONSAVEL LIKE '%$pesquisar%' OR 'LOCAL' LIKE '%$pesquisar%'";
-                                $resultado_apiario = mysqli_query($conecta, $result);
-
-                                while ($linha = mysqli_fetch_array($resultado_apiario)) { ?>
-
-
-                                    <td><?php echo $linha['DESCRICAO']; ?></td>
-                                    <td><?php echo $linha['RESPONSAVEL']; ?></td>
-                                    <td><?php echo $linha['SITUACAO']; ?></td>
-                                    <?php
-                                    $DATA = $linha['DATA_ATIVO'];
-                                    $data_BR = implode("/", array_reverse(explode("-", $DATA)));
-                                    ?>
-                                    <td><?php echo $data_BR; ?></td>
-                            </tr>
-                        <?php } ?>
-                        </tbody>
-
-                    </table>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-
-
-<!--MODAL MAPAS-->
-<div class="modal fade" id="mapas" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg ">
-        <div class="modal-content">
-
-            <!--CABEÇALHO-->
-            <div class="modal-header bg-dark text-white ">
-                <h5 class="modal-title fs-5 mx-auto " id="exampleModalLabel">Localização dos Apiários</h5>
-                <a href="apiario.php"> <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
-                        <span aria-hidden="true">&times;</span>
-                    </button> </a>
-            </div>
-            <!--CORPO-->
-            <div class="modal-body">
-                <div class="col-md-12">
-
-
-                    <!--DIV QUE CONTÉM O MAPA-->
-                    <div id="map">
                     </div>
-
-                    <script>
-                        function initMap() {
-
-                            //OPÇÕES DO MAPA
-                            var options = {
-                                zoom: 12,
-                                center: {
-                                    lat: -28.286786,
-                                    lng: -53.499586
-                                }
-                            }
-
-                            //NOVO MAPA
-                            var map = new
-                            google.maps.Map(document.getElementById('map'), options);
-
-                            //ADICIONAR O MARCADOR 1
-                            var marker = new google.maps.Marker({
-                                position: {
-                                    lat: -28.266741,
-                                    lng: -53.498730
-                                },
-                                map: map
-                            });
-
-                            //ADICIONAR O MARCADOR 2
-                            var marker = new google.maps.Marker({
-                                position: {
-                                    lat: -28.327455,
-                                    lng: -53.519828
-                                },
-                                map: map
-                            });
-
-                            //NOVA JANELA DE INFORMAÇÃO DOS MARCADORES
-                            var fritsch = new google.maps.InfoWindow({
-                                content: '<h2> Descrição marcador </h2>'
-                            });
-
-                            marker.addListener('click', function() {
-                                info.fritsch.open(map, marker);
-                            });
-
-                            //NOVA JANELA DE INFORMAÇÃO DOS MARCADORES
-                            var fritsch = new google.maps.InfoWindow({
-                                content: '<h2> Descrição marcador </h2>'
-                            });
-
-                            marker.addListener('click', function() {
-                                info.fritsch.open(map, marker);
-                            });
-
-                        }
-                    </script>
-
-                    <!-- MINHA CHAVE API MAPS-->
-                    <script async src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAE2VreFC7Urptz-GeKO7bJdEzm546VlDE&callback=initMap">
-                    </script>
-
-
-
                 </div>
             </div>
         </div>
     </div>
-</div>
+
+
+    <!--MODAL RESULTADO DA CONSULTA --->
+    <div class=" modal  " id="pesquisa" tabindex="-1" aria-labelledby="#" aria-hidden="true">
+        <div class="modal-dialog modal-lg   ">
+            <div class="modal-content ">
+
+                <!--inicio cabeçalho do modal-->
+                <div class="modal-header justify-content-center">
+                    <h4 class="modal-title fs-5" id="#">Tela de consulta</h4>
+                </div>
+
+                <!--inicio corpo do modal-->
+                <div class="conteiner-fluid">
+                    <div class="modal-body  ">
+                        <table class="table table-striped ">
+                            <thead class="table-dark ">
+                                <tr table>
+                                    <th scope="col ">Descrição</th>
+                                    <th scope="col ">Responsável</th>
+                                    <th scope="col ">Situação</th>
+                                    <th scope="col ">Ativação</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="table-striped">
+
+                                    <?php
+
+                                    if (isset($_GET['pesquisar'])) {
+                                        //$pesquisar = $_GET['pesquisar'];
+                                    }
+                                    //echo $teste;
+                                    $pesquisar = $_GET['pesquisar'];
+                                    $pesquisar;
+                                    $result = $SQL = "SELECT * FROM apiario WHERE DESCRICAO LIKE '%$pesquisar%' 
+                                        OR RESPONSAVEL LIKE '%$pesquisar%' OR 'LOCAL' LIKE '%$pesquisar%'";
+                                    $resultado_apiario = mysqli_query($conecta, $result);
+
+                                    while ($linha = mysqli_fetch_array($resultado_apiario)) { ?>
+
+
+                                        <td>
+                                            <?php echo $linha['DESCRICAO']; ?>
+                                        </td>
+                                        <td>
+                                            <?php echo $linha['RESPONSAVEL']; ?>
+                                        </td>
+                                        <td>
+                                            <?php echo $linha['SITUACAO']; ?>
+                                        </td>
+                                        <?php
+                                        $DATA = $linha['DATA_ATIVO'];
+                                        $data_BR = implode("/", array_reverse(explode("-", $DATA)));
+                                        ?>
+                                        <td>
+                                            <?php echo $data_BR; ?>
+                                        </td>
+                                    </tr>
+                                <?php } ?>
+                            </tbody>
+
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!--MODAL MAPAS-->
+    <div class="modal fade" id="mapas" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg ">
+            <div class="modal-content">
+
+                <!--CABEÇALHO-->
+                <div class="modal-header bg-dark text-white ">
+                    <h5 class="modal-title fs-5 mx-auto " id="exampleModalLabel">Localização dos Apiários</h5>
+                    <a href="apiario.php"> <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
+                            <span aria-hidden="true">&times;</span>
+                        </button> </a>
+                </div>
+                <!--CORPO-->
+                <div class="modal-body">
+                    <div class="col-md-12">
+
+
+                        <!--DIV QUE CONTÉM O MAPA-->
+                        <div id="map">
+                        </div>
+
+                        <script>
+                            function initMap() {
+
+                                //OPÇÕES DO MAPA
+                                var options = {
+                                    zoom: 12,
+                                    center: {
+                                        lat: -28.286786,
+                                        lng: -53.499586
+                                    }
+                                }
+
+                                //NOVO MAPA
+                                var map = new
+                                    google.maps.Map(document.getElementById('map'), options);
+
+                                //ADICIONAR O MARCADOR 1
+                                var marker = new google.maps.Marker({
+                                    position: {
+                                        lat: -28.266741,
+                                        lng: -53.498730
+                                    },
+                                    map: map
+                                });
+
+                                //ADICIONAR O MARCADOR 2
+                                var marker = new google.maps.Marker({
+                                    position: {
+                                        lat: -28.327455,
+                                        lng: -53.519828
+                                    },
+                                    map: map
+                                });
+
+                                //NOVA JANELA DE INFORMAÇÃO DOS MARCADORES
+                                var fritsch = new google.maps.InfoWindow({
+                                    content: '<h2> Descrição marcador </h2>'
+                                });
+
+                                marker.addListener('click', function () {
+                                    info.fritsch.open(map, marker);
+                                });
+
+                                //NOVA JANELA DE INFORMAÇÃO DOS MARCADORES
+                                var fritsch = new google.maps.InfoWindow({
+                                    content: '<h2> Descrição marcador </h2>'
+                                });
+
+                                marker.addListener('click', function () {
+                                    info.fritsch.open(map, marker);
+                                });
+
+                            }
+                        </script>
+
+                        <!-- MINHA CHAVE API MAPS-->
+                        <script async
+                            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAE2VreFC7Urptz-GeKO7bJdEzm546VlDE&callback=initMap">
+                            </script>
+
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
 </body>
 
