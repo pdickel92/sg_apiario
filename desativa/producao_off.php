@@ -21,6 +21,3 @@ else
 	echo"<script>alert('Tarefa não pode ser excluído!')</script>";
 //	echo"<script>window.location='listar_usuarios.php'</script>";
 ?>
-
-
-

@@ -1,7 +1,7 @@
 <?php
 
 //INICIO DE UMA SESSÃO
-//SESSION_START();
+SESSION_START();
 
 
 $USER =$_POST["USUARIO"];
@@ -15,6 +15,7 @@ $verifica_login = mysqli_query($conecta,$verifica_login); // conexão ao banco d
 $valor = mysqli_num_rows($verifica_login); // 
 if ($valor>0){
     $_SESSION['USUARIO_LOGIN'] = true;
+    $_SESSION['NOME_USUARIO'] = $USER;
     header("location:principal.php");
     echo"<script>alert('USUARIO CONECTADO');</script>";
     //echo"<script>window.location= 'principal.php'</script>";

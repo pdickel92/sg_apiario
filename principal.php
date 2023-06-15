@@ -11,7 +11,7 @@
     <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
 
     <!--CSS-->
-    <link rel="stylesheet" href="css/estilo_principal.css">
+    <link rel="stylesheet" href="css/estilo.css">
 
     <!--CSS BOOTSTRAP-->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
@@ -23,35 +23,34 @@
 
 <body>
     <?php
-
-    //session_start(); //inicio de sessão
-    //if (!isset($_SESSION['USUARIO_LOGIN'])){            // se a sessão USUARIO_LOGIN não for encontrada
-     //header("location:index.php");                   // redirecionar usuario para index.php
-    //session_destroy();
-    //}
-
-
+        session_start(); //inicio de sessão
+        if (!isset($_SESSION['USUARIO_LOGIN'])){   // se a sessão USUARIO_LOGIN não for encontrada
+        header("location:index.php");       // redirecionar usuario para index.php
+        session_destroy();
+    }
     include("config_login.php");
     ?>
+
     <!-- menu de navegação responsivo-->
     <nav class="navbar  bg-dark  navbar-dark">
         <div class="container">
-            <!--mostrar usuario e data-->
-            <span class="navbar-text">
-                Bem vindo: Fernando
-            </span>
-            <!--botão responsivo-->
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#menu" style="cursor:pointer">
-                <span class="navbar-toggler-icon">
-                </span>
-            </button>
 
+            <div class="d-flex align-items-center">
+                <button class="navbar-toggler me-3" type="button" data-bs-toggle="collapse" data-bs-target="#menu" style="cursor:pointer"><span class="navbar-toggler-icon"></span>
+                </button>
+                <a href="principal.php" class="ms-auto"> <img src="img/home1.png" width="37px" height="35px"></a>
+            </div>
+            <span class="navbar-text d-flex justify-content-center mx-auto">
+              <text style="font-family: 'Times New Roman', Times, serif; font-size: 25px; font-weight: bold; color: white;">Home</text>
+            </span>
+            <div class="navbar-text d-flex justify-content-end">
+                <span class="me-3">Bem-vindo: <?php echo $_SESSION['NOME_USUARIO'];?></span>
+                <a href="logoff.php" class="nav-link">Sair</a>
+            </div>
+            
             <!--itens do botão-->
             <div class="navbar-collapse collapse" id="menu">
                 <ul class="navbar-nav">
-                    <li class="nav-item">
-                        <a class="nav-link" href="logoff.php">Desconectar </a>
-                    </li>
                     <li class="nav-item">
                         <a class="nav-link" href="producao.php">Produção </a>
                     </li>
@@ -68,27 +67,45 @@
                         <a class="nav-link" href="rainha.php">Raínha</a>
                     </li>
                 </ul>
-            </div>
+                <!--FINAL ITENS DO BOTÃO RESPONSIVO-->
+            </div>    
     </nav>
+            <script>
+                document.addEventListener('click', function(event) {
+                var navbarMenu = document.getElementById('menu');
+                var targetElement = event.target; // Elemento clicado
 
+                // Verifica se o elemento clicado está dentro do menu
+                var isClickedInsideMenu = navbarMenu.contains(targetElement);
+
+                if (!isClickedInsideMenu) {
+                    // Remove a classe "show" para recolher o menu
+                    navbarMenu.classList.remove('show');
+                }
+                });
+            </script>
+    
 
     <!-- container que contém todo o conteudo-->
-    <div class="container CONT img-responsive mx-auto align-items-center " style="background-color:whitesmoke;">
+    <div class="container CONT img-responsive mx-auto align-items-center " >
 
         <!--linha 01-->
-        <div class="row img-responsive mx-auto align-items-center pt-2 " style="background-color: whitesmoke;">
+        <div class="row img-responsive mx-auto align-items-center pt-2 ">
 
             <!--COLUNA01 LINHA01-->
             <div class="col-md-12 img-responsive mx-auto align-items-center text-center ">
                 <div class="IMG">
+                    <br><br>
                     <img src="img/logo2.png" alt="img" style="max-width: 220px;">
+                    <br><br><br><br>
                 </div>
             </div>
         </div>
     </div>
 
 
-    <div class="container" style="background-color:whitesmoke;">
+    <div class="container" style="min-height: 60px; background: rgba(255, 255, 255, 0.3); border-radius: 20px;">
+
 
         <!--LINHA02-->
         <div class="row pt-5 " style="min-height:250px;">
@@ -160,10 +177,8 @@
                                                     </div>
                                                     <div class="booked-wzs-250-175-info">
                                                         <div class="booked-wzs-250-175-city">Panambi </div>
-                                                        <div class="booked-wzs-250-175-date">Quinta-Feira, 06 Outubro
-                                                        </div>
-                                                        <div class="booked-wzs-left"> <span class="booked-wzs-bottom-l">Ver Previsão de 7
-                                                                Dias</span> </div>
+                                                        <div class="booked-wzs-250-175-date">Quinta-Feira, 06 Outubro</div>
+                                                        <div class="booked-wzs-left"> <span class="booked-wzs-bottom-l">Ver Previsão de 7 Dias</span> </div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -251,14 +266,10 @@
                                 </script>
                                 <!-- weather widget end -->
                             </div>
-
                         </div>
                     </div>
                 </div>
-
             </div>
-
-
             <!--COLUNA03 LINHA02-->
             <div class="col-md-6  ">
                 <!--CONTAINER DENTRO DA COLUNA 03 LINHA 02-->
@@ -274,73 +285,66 @@
                             ?>
 
                             <!--CONTAINER TABELA DE DADOS-->
-                            <div class="container ct-tabela ">
-                                <div class="row linhaTAB  dt-responsive table-responsive ">
-                                    <div class="col table-responsive">
-                                        <table class=" table table-striped  ">
-                                            <thead class="table-dark    ">
-                                                <tr class="table-md   ">
-                                                    <th scope="col">Categoria</th>
-                                                    <th scope="col">Data</th>
-                                                    <th scope="col">Prioridade</th>
-
-
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <tr class="table-striped ">
-                                                    <?php
-                                                    $sql_BUSCA_TAREFA = "SELECT * FROM tarefa";
-                                                    $BUSCA_TAREFA = mysqli_query($conecta, $sql_BUSCA_TAREFA);
-                                                    while ($linha  = mysqli_fetch_array($BUSCA_TAREFA)) {
-
-
-
-                                                        echo "<td>" . $linha['CATEGORIA'];
-                                                        "</td>";
-                                                        echo "<td>" . $linha['DATA_TAREFA'];
-                                                        "</td>";
-                                                        echo "<td>" . $linha['PRIORIDADE'];
-                                                        "</td>                                                                                                
-                                                      
-
-                                                            
-                                                     
-                                                </tr>";
-                                                    } ?>
-                                            </tbody>
-                                        </table>
-
-                                    </div>
+                            <div class="container ct-tabela">
+                            <div class="row linhaTAB dt-responsive table-responsive">
+                                <div class="col table-responsive">
+                                    <table class="table table-striped table-bordered table-rounded">
+                                        <thead class="table-dark">
+                                            <tr>
+                                                <th scope="col">Apiário</th>
+                                                <th scope="col">Tarefa</th>
+                                                <th scope="col">Prazo</th>
+                                                <th scope="col">Prioridade</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <?php
+                                            $sql_BUSCA_TAREFA = "SELECT tarefa.*, apiario.DESCRICAO FROM tarefa, apiario WHERE tarefa.COD_APIARIO = apiario.COD_APIARIO";
+                                            $BUSCA_TAREFA = mysqli_query($conecta, $sql_BUSCA_TAREFA);
+                                            while ($linha = mysqli_fetch_array($BUSCA_TAREFA)) {
+                                                $prioridade = $linha['PRIORIDADE'];
+                                                $linhaClass = ($prioridade == 'Alta') ? 'table-danger' : '';
+                                                echo "<tr class='$linhaClass'>";
+                                                echo "<td class='align-middle'>" . $linha['DESCRICAO'] . "</td>";
+                                                echo "<td class='align-middle'>" . $linha['CATEGORIA'] . "</td>";
+                                                echo "<td class='align-middle'>" . $linha['DATA_TAREFA'] . "</td>";
+                                                echo "<td class='align-middle'>" . $linha['PRIORIDADE'] . "</td>";
+                                                echo "</tr>";
+                                            }
+                                            ?>
+                                        </tbody>
+                                    </table>
                                 </div>
                             </div>
                         </div>
-
-
+                        </div>
                     </div>
                 </div>
+                <!-- Rodapé -->
                 <div class="container">
-                    <div class="row fixed-bottom " style="min-height:170px; background-color:black;">
-
-
-                        <div clas="container-fluid ">
-                            <div class="row">
-                                <div class="col-2 offset-1 mt-2" style=" border-radius:10px;">
-
-
-                                </div>
-                                <div class="col-2 offset-1 mt-2" style=" border-radius:10px;">
-
-
-                                </div>
+                <div class="row fixed-bottom" style="min-height: 60px; background: rgba(0, 0, 0, 0.5);">
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-2 offset-1 mt-2" style="border-radius: 10px;">
+                                <!-- Logotipo -->
+                                <img src="img/logo2.png" alt="Logotipo" width="100">
                             </div>
+                            <div class="col-6 text-center mt-2" style="border-radius: 10px;">
+                                <!-- Informações de contato e redes sociais -->
+                                <span>Acompanhe nossas redes sociais! </span>
+                                <a href="https://www.instagram.com" name="Instagram" class="ms-auto" target="_blank"><img src="img/insta.png" width="37px" height="35px"></a>
+                                <a href="https://www.facebook.com" name="Facebook" class="ms-auto" target="_blank"><img src="img/face.png" width="37px" height="35px"></a>
+                                <a href="https://www.twitter.com" name="Twitter" class="ms-auto" target="_blank"><img src="img/twitter.png" width="37px" height="35px"></a>
+                                <a href="https://www.youtube.com" name="Youtube" class="ms-auto" target="_blank"><img src="img/youtube.png" width="37px" height="35px"></a>
+                            </div>
+                                <div class="col-2 offset-1 mt-2" style="border-radius: 10px;">
+                                    <a href="https://wa.me/55991696366?text=Ol%C3%A1%2C%20gostaria%20de%20uma%20ajuda%20em%20rela%C3%A7%C3%A3o%20ao%20software%20de%20gerenciamento%20de%20api%C3%A1rios!" 
+                                    class="btn btn-primary" target="_blank">Chamar Suporte (WhatsApp)</a>
+                                </div>
+                            <div>
                         </div>
-
-
                     </div>
-
                 </div>
-
+            </div>
 </body>
-
 </html>

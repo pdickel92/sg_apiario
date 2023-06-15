@@ -97,8 +97,7 @@ INSERT INTO `colmeia` (`DESC_COLMEIA`, `DATA_INSTALACAO`, `COD_COLMEIA`, `CAIXA`
 -- Estrutura stand-in para vista `lista_colmeia7`
 -- (Veja abaixo para a view atual)
 --
-CREATE TABLE `lista_colmeia7` (
-);
+CREATE TABLE `lista_colmeia7` ();
 
 -- --------------------------------------------------------
 
