@@ -11,11 +11,10 @@
       top: 0;
       left: 0;
       width: 100%;
-      background-color: rgba(0, 0, 0, 0.1);
+      background-color: rgba(0, 0, 0, 0.7);
       /* Amarelo com transparência background: rgba(0, 0, 0, 0.5);">*/
       padding: 10px;
       text-align: center;
-      color: rgba(0, 0, 0, 1);
       font-size: 20px;
       /* Tamanho de fonte maior */
       font-family: Arial, sans-serif;
@@ -23,14 +22,14 @@
     }
 
     .menu.transparente {
-      background-color: rgba(250, 250, 0, 0.4);
+      background-color: rgba(0, 0, 0, 0.4);
       /* Amarelo mais transparente */
     }
 
     .menu a {
       display: inline-block;
       margin: 0 10px;
-      color: #333;
+      color: #dfb127;
       text-decoration: none;
       transition: color 0.3s;
       position: relative;
@@ -38,8 +37,11 @@
     }
 
     .menu a:hover {
-      color: #666;
+      color: yellow;
+      text-decoration: underline;
+      text-decoration-color: yellow;
     }
+
 
     /* Estilos CSS para o formulário de login inserido do formulario antigo */
 
@@ -102,27 +104,16 @@
       box-shadow: 0 0 5px rgba(0, 0, 0, 0.8);
     }
 
-    .menu a:hover::after {
-      content: '';
-      position: absolute;
-      bottom: -2px;
-      left: 0;
-      width: 100%;
-      height: 2px;
-      background-color: #444;
-      /* Cinza escuro */
-    }
-
     .title {
       font-size: 24px;
       font-weight: bold;
       margin-bottom: 20px;
     }
 
-    .input-container {
+    /* .input-container {
       position: relative;
       margin-bottom: 20px;
-    }
+    } */
 
     .input {
       width: 100%;
@@ -130,6 +121,7 @@
       border: none;
       border-bottom: 1px solid #888;
       font-size: 16px;
+      border-radius: 10px;
     }
 
     .label {
@@ -157,6 +149,20 @@
 
     .btn:hover {
       background-color: #666;
+    }
+
+    .legenda-p {
+
+      background-color: transparent;
+      border-radius: 8px;
+      height: 20px;
+      left: 20px;
+      position: absolute;
+      top: -20px;
+      transform: translateY(0);
+      transition: transform 200ms;
+      width: 100px;
+
     }
 
     /* Estilos CSS para a seção de contratação */
@@ -311,10 +317,13 @@
     }
 
     .vantagem {
-      flex-basis: 20%;
+      flex-basis: 15%;
       text-align: center;
       margin-bottom: 20px;
+      margin-left: auto;
+      margin-right: auto;
     }
+
 
     .vantagem img {
       width: 100%;
@@ -327,7 +336,7 @@
     /* Estilos CSS para a seção de história da empresa */
     .historia {
       height: 1000px;
-      background-color: rgba(200, 250, 60, 0.3);
+      background-color: rgba(240, 250, 30, 0.2);
       text-align: center;
       font-size: 24px;
       padding-top: 200px;
@@ -371,12 +380,12 @@
 
     /* Estilos CSS para as redes sociais */
     .redes-sociais {
-      height: 400px;
+      height: 600px;
       background-color: #fff;
       text-align: center;
       font-size: 24px;
-      padding-top: 200px;
-      background-color: whitesmoke;
+      padding-top: 60px;
+      background-color: rgba(200, 200, 200, 0.6);
     }
 
     /* Estilo para o plano de fundo */
@@ -385,6 +394,7 @@
       background-repeat: no-repeat;
       background-size: cover;
       background-position: center;
+      background-color: rgba(200, 200, 200, 0.6);
     }
   </style>
   <script>
@@ -427,19 +437,21 @@
   </script>
 
 
-  <img src="img/logo2.png">
+  <img src="img/logo2.png" style="display: block; margin: 0 auto;">
 
   <form class="formulario" id="login" method="post" action="verifica_login.php">
     <div class="title">Login</div>
     <div class="input-container">
-      <input id="nome" name="USUARIO" class="input" type="text" placeholder="" />
+      <input id="nome" name="USUARIO" class="input" type="text" placeholder="Usuário" />
       <div class="legenda-p"></div>
-      <label for="nome" class="label icon icon-user-1">Nome</label>
+      <!-- <label for="nome" class="label icon icon-user-1">Nome</label> -->
     </div>
+    <br>
+    <br>
     <div class="input-container">
-      <input id="email" class="input" name="SENHA" type="password" placeholder="" />
+      <input id="email" class="input" name="SENHA" type="password" placeholder="Senha" />
       <div class="legenda-p"></div>
-      <label for="email" class="label icon icon-lock-1">Senha</label>
+      <!-- <label for="email" class="label icon icon-lock-1">Senha</label> -->
     </div>
     <br>
     <p class="link">
@@ -448,6 +460,7 @@
     </p>
     <button type="text" class="btn">Entrar</button>
   </form>
+
   <script>
     function limparTexto() {
       var nomeInput = document.getElementById("nome");
@@ -639,13 +652,13 @@
 
   <div id="vantagens" class="vantagens">
     <h2>Vantagens de usar nosso sistema</h2>
-    <p>Aqui estão algumas vantagens do nosso sistema de gerenciamento de apicultores:</p>
+    <p>Aqui estão algumas vantagens do nosso sistema de gerenciamento para apicultores:</p>
     <ul>
-      <li>Maior eficiência operacional: Automatize tarefas diárias e economize tempo.</li>
-      <li>Monitoramento preciso das colmeias: Obtenha informações em tempo real sobre temperatura, umidade e atividade
-        das abelhas.</li>
-      <li>Tomada de decisão informada: Acesse análises avançadas para otimizar a produção de mel e a saúde das abelhas.
-      </li>
+      <p>Maior eficiência operacional: Gerencie tarefas diárias e economize tempo.</p>
+      <p>Monitoramento preciso das colmeias: Obtenha informações em tempo real sobre temperatura, umidade e atividade
+        das abelhas.</p>
+      <p>Tomada de decisão informada: Acesse análises avançadas para otimizar a produção de mel e a saúde das abelhas.
+      </p>
     </ul>
     <br>
     <br>
@@ -671,6 +684,10 @@
         <img src="img/suport.png" alt="Suporte via WhatsApp">
         <p>Suporte via WhatsApp</p>
       </div>
+      <div class="vantagem">
+        <img src="img/iot.png" alt="IOT">
+        <p>Monitoramento IOT</p>
+      </div>
     </div>
   </div>
 
@@ -680,7 +697,7 @@
     <div id="historia" class="historia">
       <h2 style="color: black;">Nossa história</h2>
       <ul style="color: black;">
-        <li>Na incubadora do Instituto Federal Farroupilha, três jovens estudantes, impulsionados por visões
+        <p>Na incubadora do Instituto Federal Farroupilha, três jovens estudantes, impulsionados por visões
           empreendedoras
           e movidos por incansável esforço, transformaram um sistema inovador em uma empresa de sucesso. Através de
           determinação,
@@ -688,7 +705,7 @@
           reconhecimento
           e prosperidade. Essa trajetória exemplar é um testemunho inspirador do potencial empreendedor presente nas
           mentes jovens, e um símbolo do impacto transformador que pode ser alcançado quando a criatividade e a
-          persistência se unem em busca de um sonho.</li>
+          persistência se unem em busca de um sonho.</p>
       </ul>
       <br>
       <br>
@@ -728,14 +745,12 @@
       </div>
 
       <div id="redes-sociais" class="redes-sociais">
-        <h2>Empresa</h2>
+        <h2>Tech Solutions Ltda.</h2>
         <ul>
-          <li>Tech Solutions Ltda.</li>
-          <li>Setor: Tecnologia da Informação</li>
-          <li>Segmento: Desenvolvimento de Software e Consultoria em TI</li>
-          <li>Endereço: Rua Das Loucuras, 123 - Panambi, RS</li>
-          <li>Telefone: (55) 99169-6366</li>
-          <li>Email: techs@techs.com.br</li>
+          <p>Segmento: Desenvolvimento de Software e Consultoria em TI</p>
+          <p>Endereço: Rua Das Loucuras, 123 - Panambi, RS</p>
+          <p>Telefone: (55) 99169-6366</p>
+          <p>Email: techs@techs.com.br</p>
         </ul>
         <h2>Redes Sociais</h2>
         <p>Conecte-se conosco nas redes sociais:</p>
