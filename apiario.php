@@ -13,7 +13,6 @@
     <!--CSS BOOTSTRAP-->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
-
     <!--CSS-->
 
 
@@ -138,8 +137,8 @@ $resultado = mysqli_query($conecta, $exibe_apiario) // $resultado recebe por com
     </div>
 
 
-    <!--CONTAINER TABELA DE DADOS-->
-    <div class="container overflow-auto " style="max-height: 300px; min-height:300px; margin-top:5px; background: rgba(255, 255, 255, 0.4); border-radius: 20px;">
+   <!--CONTAINER TABELA DE DADOS-->
+   <div class="container overflow-auto " style="max-height: 300px; min-height:300px; margin-top:5px; background: rgba(255, 255, 255, 0.4); border-radius: 20px;">
         <div class="row linhaTAB  dt-responsive table-responsive overflow-auto" >
             <!-- <div class="col table-responsive" > -->
                 <table class=" table  overflow-auto"  style="width:100%; " >
@@ -148,7 +147,8 @@ $resultado = mysqli_query($conecta, $exibe_apiario) // $resultado recebe por com
                             <th scope="col">Identificação</th>
                             <th scope="col">Responsável</th>
                             <th scope="col">Ações</th>
-                            <th scope="col">Mais Informações do Apiário</th>                            
+                            <th scope="col">Mais Informações do Apiário</th>
+                            
                         </tr>
                     </thead>
                     <tbody>
@@ -346,7 +346,7 @@ $resultado = mysqli_query($conecta, $exibe_apiario) // $resultado recebe por com
                                                     <?php $cod_ap = $linha['COD_APIARIO'];
                                                     $busca = "SELECT COUNT(DESC_RAINHA) AS cod FROM lista_colmeia8 WHERE COD_APIARIO = $cod_ap";
                                                     $query = mysqli_query($conecta, $busca);
-                                                    // $result_col = mysqli_fetch_array($query);  Verificar com fernando
+                                                     $result_col = mysqli_fetch_array($query);  
                                                     ?>
                                                     <img src="img/rainha.png" width="70px" style="padding-top: 15px;">
                                                     <p style="color: blue; font-weight: bold; font-size: 60px; float: left;">
@@ -450,7 +450,7 @@ $resultado = mysqli_query($conecta, $exibe_apiario) // $resultado recebe por com
                                         <div class=" container">
                                             <div class="row ">
                                                 <div class="col md-12 COL1 ">
-                                                    <div class="col-md-8" style='overflow-x:auto; height:300px;'>
+                                                    <div clas="col-md-8" style='overflow-x:auto; height:300px;'>
                                                         <?php
                                                         //OBTER CÓDIGO DO APIÁRIO
                                                         $cod_ap = $linha['COD_APIARIO'];
@@ -558,7 +558,7 @@ $resultado = mysqli_query($conecta, $exibe_apiario) // $resultado recebe por com
                                 </div>
                             </div>
                         </div>
-            </div>
+           <!-- </div> -->
         </div>
     </div>
 
