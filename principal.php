@@ -72,6 +72,9 @@
                     <li class="nav-item">
                         <a class="nav-link" href="rainha.php">Raínhas</a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="floradas.php">Floradas</a>
+                    </li>
                 </ul>
                 <!--FINAL ITENS DO BOTÃO RESPONSIVO-->
             </div>
@@ -92,8 +95,8 @@
     </script>
 
 
-    <!-- container que contém todo o conteudo-->
-    <div class="container CONT img-responsive mx-auto align-items-center ">
+    
+    <div class="container CONT img-responsive mx-auto align-items-center" style='max-height:180px; border:0px solid red;'>
 
         <!--linha 01-->
         <div class="row img-responsive mx-auto align-items-center pt-2 ">
@@ -109,12 +112,12 @@
         </div>
     </div>
 
-
-    <div class="container" style="min-height: 60px; background: rgba(255, 255, 255, 0.3); border-radius: 20px;">
+   <!-- container que contém todo o conteudo-->
+    <div class="container" style=" background: rgba(255, 255, 255, 0.3); border-radius: 20px;">
 
 
         <!--LINHA02-->
-        <div class="row pt-5 " style="min-height:250px;">
+        <div class="row pt-5 " style="height:270px;">
 
             <!--COLUNA01 LINHA02--->
             <div class="col-md-3 pt-2 ">
@@ -158,7 +161,7 @@
                 <!--CONTAINER DENTRO DA COLUNA 02 LINHA 02-->
                 <div clas="container ">
                     <div class="row ">
-                        <div class="col">
+                        <div class="col" style="margin-left:-10px;">
 
                             <!--PREVISÃO DO TEMPO -->
                             <div class="tempo">
@@ -298,11 +301,11 @@
                                 ?>
 
                             <!--CONTAINER TABELA DE DADOS-->
-                            <div class="container ct-tabela">
+                            <div class="container ct-tabela overflow-auto " style="max-height:210px; width:580px; margin-top: -40px; margin-left:-30px; border-radius:15px; border:0px solid red;">
                                 <div class="row linhaTAB dt-responsive table-responsive">
-                                    <div class="col table-responsive">
-                                        <table class="table table-striped table-bordered table-rounded">
-                                            <thead class="table-dark">
+                                    <div class="col table-responsive" style="border: 0px solid green;">
+                                        <table class="table table-striped table-rounded">
+                                            <thead class=" thead-ligh bg-primary">
                                                 <tr>
                                                     <th scope="col">Apiário</th>
                                                     <th scope="col">Tarefa</th>
@@ -334,28 +337,28 @@
                     </div>
                 </div>
             </div>
-
+            
             <!---CONTAINER ITENS DO RODAPE--->
-            <div class="row fixed-bottom" style="min-height: 60px; background: rgba(0, 0, 0, 0.5);">
+            <div class="row fixed-bottom" style="min-height: 60px; max-height:60px; background: rgba(0, 0, 0, 0.5);">
                 <div class="container-fluid">
                     <div class="row">
-                        <div class="col-2 offset-1 mt-2" style="border-radius: 10px;">
+                        <div class="col-2 offset-1 mt-0" style="border-radius: 10px;">
                             <!-- Logotipo -->
                             <img src="img/logo2.png" alt="Logotipo" width="100">
                         </div>
                         <div class="col-6 text-center mt-2" style="border-radius: 10px;">
                             <!-- Informações de contato e redes sociais -->
-                            <span>Acompanhe nossas redes sociais! </span>
+                            <span style="padding-right:15px; color:black;">Acompanhe nossas redes sociais! </span>
                             <a href="https://www.instagram.com" name="Instagram" class="ms-auto" target="_blank"><img
-                                    src="img/insta.png" width="37px" height="35px"></a>
+                                    src="img/insta.png" width="35px" height="35px" style="padding-right:5px;"></a>
                             <a href="https://www.facebook.com" name="Facebook" class="ms-auto" target="_blank"><img
-                                    src="img/face.png" width="37px" height="35px"></a>
+                                    src="img/face.png" width="35px" height="35px" style="padding-right:5px;"></a>
                             <a href="https://www.twitter.com" name="Twitter" class="ms-auto" target="_blank"><img
-                                    src="img/twitter.png" width="37px" height="35px"></a>
+                                    src="img/twitter.png" width="35px" height="35px" style="padding-right:5px;"></a>
                             <a href="https://www.youtube.com" name="Youtube" class="ms-auto" target="_blank"><img
-                                    src="img/youtube.png" width="37px" height="35px"></a>
+                                    src="img/youtube.png" width="35px" height="35px" style="padding-right:5px;"></a>
                         </div>
-                        <div class="col-2 offset-1 mt-2" style="border-radius: 10px;">
+                        <div class="col-3 offset-0 mt-2" style="border-radius: 10px;">
                             <a href="https://wa.me/55991696366?text=Ol%C3%A1%2C%20gostaria%20de%20uma%20ajuda%20em%20rela%C3%A7%C3%A3o%20ao%20software%20de%20gerenciamento%20de%20api%C3%A1rios!"
                                 class="btn btn-primary" target="_blank">Chamar Suporte (WhatsApp)</a>
                         </div>

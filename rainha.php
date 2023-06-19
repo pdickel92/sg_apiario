@@ -74,6 +74,9 @@ $resultado = mysqli_query($conecta, $exibe_colmeia) // $resultado recebe por com
                     <li class="nav-item">
                         <a class="nav-link" href="rainha.php">Raínhas</a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="floradas.php">Floradas</a>
+                    </li>
                 </ul>
                 <!--FINAL ITENS DO BOTÃO RESPONSIVO-->
             </div>    
@@ -100,22 +103,32 @@ $resultado = mysqli_query($conecta, $exibe_colmeia) // $resultado recebe por com
         <!--inicio da linha 1----->
         <div class="row  mx-auto align-items-center l1">
 
-            <!--coluna 1 linha 1------>
+            <!--coluna 1 linha 1 LOGOTIPO DO SISTEMA------>
             <div class="col-12  mx-auto text-center img-responsive ">
-                <div class="img">
-                    <img class="logo" src="img/logo2.png" width="200px;" alt="img"> </img>
-                </div>
-                <!-- Funçoes de adicionar e buscar -->
-                <form class="d-flex img-responsive dt-responsive ml-2" action="" method="get">
-                    <button type="button" class="btn btn-dark btn-sm btcad" data-bs-toggle="modal"
-                        data-bs-target="#CadApiarioModal"> <!--MODAL ADICIONAR--->
-                        Adicionar Tarefa <img src='img/add.png' width='22px' height='22px' class="img-responsive">
+            <div class="img" style="height:130px;">
+                <img class="log" src="img/logo2.png"   width="auto;" height="130px"; alt="img"> </img>
+            </div>
+
+            <!------------------------------- ------------------ MENU SUPERIOR ---------------------------------->
+            <div class=" row " >
+                <div class="col-4" style="margin-left:-20px;" >
+                    <!--BOTÃO ADICIONAR COLMEIA--->
+                    <button type="button" class="btn btn-success btn-sm btcad" data-bs-toggle="modal" data-bs-target="#CadApiarioModal" >                    
+                        Adicionar Rainha <img src='img/add.png' width='22px' height='28px' class="img-responsive">
                     </button>
-                    <button type="submit" class="btn btn-primary btn-sm" data-bs-target="#pesquisa"> <!--Pesquisar--->
-                        Buscar <img src='img/lupa.png' width='20px' height='20px' class="img-responsive"></button>
-                    <input class="form-control" name="pesquisar" type="text"
-                        style="width: 100%; background: rgba(255, 255, 255, 0.3);" />
-                </form><br>
+                </div>                    
+                <div class="col-8" >
+                    <!-- Funçoes de adicionar e buscar -->
+                    <form class="d-flex img-responsive dt-responsive ml-0" action="" method="get">                    
+
+                        <!--Pesquisar---> 
+                        <button type="submit" class="btn btn-primary " data-bs-target="#pesquisa" style="width:120px; height:38px;" > Buscar 
+                            <img src='img/lupa.png' width='20px' height='20px' class="img-responsive" >
+                        </button>
+                        <input class="form-control" name="pesquisar" type="text" style="width: 100%; background: rgba(255, 255, 255, 0.3);"  />
+                    </form>
+                </div>                
+                    
             </div>
 
         </div>
@@ -123,12 +136,13 @@ $resultado = mysqli_query($conecta, $exibe_colmeia) // $resultado recebe por com
     </div>
 
 
+
     <!--CONTAINER TABELA DE DADOS-->
-    <div class="container" style="min-height: 60px; background: rgba(255, 255, 255, 0.4); border-radius: 20px;">
-        <div class="row linhaTAB  dt-responsive table-responsive ">
-            <div class="col table-responsive">
-                <table class=" table table-striped  ">
-                    <thead class="table-dark    ">
+    <div class="container overflow-auto " style="max-height: 300px; min-height:300px; margin-top:5px; background: rgba(255, 255, 255, 0.4); border-radius: 20px;">
+        <div class="row linhaTAB  dt-responsive table-responsive overflow-auto" >
+            <!-- <div class="col table-responsive" > -->
+                <table class=" table  overflow-auto"  style="width:100%; " >
+                    <thead class="table-dark position:sticky;   ">
                         <tr class="table-md   ">
                             <th scope="col">ID</th>
                             <th scope="col ">Inserção</th>

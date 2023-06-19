@@ -16,10 +16,8 @@
 	$RESP		            = $_POST["RESPONSAVEL"];
 	$dt_inativo             = $_POST["dt_inativo"];
 	$dt_ativo               = $_POST["dt_ativo"];
-	$RUA             	    = $_POST["RUA"];
-	$BAIRRO                 = $_POST["BAIRRO"];
-	$NUMERO                 = $_POST["NUMERO"];
-	$CIDADE                 = $_POST["CIDADE"];
+	$LOCAL	                = $_POST["LOCAL"];
+	$DESCRICAO              = $_POST["DESCRICAO"];
 	$LATITUDE               = $_POST["LATITUDE"];
 	$LONGITUDE              = $_POST["LONGITUDE"];
 
@@ -38,15 +36,7 @@
 
 	//SELECT ULTIMO REGISTRO TABELA APIARIO
 	include('../config_login.php');
-		$consulta_ID = mysqli_query($conecta, "select COD_APIARIO from apiario ORDER BY COD_APIARIO DESC ");
-		$ID 	  = mysqli_num_rows($consulta_ID);
-
-		//SOMA AO ÚLTIMO CÓDIGO +1
-		$ID = $ID + 1;
-
-		//CONCATENA STRING COM $ID
-		$codigo = "AP" . $ID." - ".$BAIRRO;
-		$desc_apiario = $codigo;
+		
 
 		$STATUS = 1;
 		$dt_ativo = date('Y/m/d');
@@ -56,7 +46,7 @@
 		//include("../config_login.php");
 
 		//VERIFICAÇÃO SE ALGUM REGISTRO JÁ EXISTE
-		$consulta_registro = mysqli_query($conecta, "select * from apiario where RUA = '$RUA' AND BAIRRO = '$BAIRRO' AND CIDADE = '$CIDADE' AND NUMERO = '$NUMERO'");
+		$consulta_registro = mysqli_query($conecta, "select * from apiario where ENDERECO = '$LOCAL' AND DESCRICAO = '$DESCRICAO'");
 		$valor 	  = mysqli_num_rows($consulta_registro);
 
 
@@ -64,7 +54,7 @@
 			echo "<script>alert('Registro já cadastrado!');</script>";
 			//echo "<script>window.history.go(-1);</script>";
 		} else {
-			$insercao = mysqli_query($conecta, "INSERT into APIARIO values('','$desc_apiario', '$RESP','$STATUS','$dt_ativo','$dt_inativo','$novo_nome_do_arquivo','$CIDADE','$RUA','$BAIRRO','$NUMERO','$LATITUDE','$LONGITUDE','$caminho' )") or die("Falha ao inserir um novo registro!");
+			$insercao = mysqli_query($conecta, "INSERT into APIARIO values('','$DESCRICAO', '$RESP','$STATUS','$dt_ativo','$dt_inativo','$novo_nome_do_arquivo','$LATITUDE','$LONGITUDE','$caminho','$LOCAL' )") or die("Falha ao inserir um novo registro!");
 
 			if ($insercao == 1) {
 				echo "<script>window.location = '../apiario.php'</script>";

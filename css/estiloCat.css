@@ -93,3 +93,6 @@ body {
 .btncad {
   border: 1px solid white;
 }
+.table-rounded {
+  border-radius: 10px;
+}

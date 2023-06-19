@@ -13,15 +13,14 @@
     <!--CSS BOOTSTRAP-->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
-
     <!--CSS-->
 
 
 </head>
 <?php
 include("config_login.php");
-$exibe_apiario = "select * from apiario where SITUACAO = 1"; //$busca_CATcaixas recebe o código SQL
-$resultado = mysqli_query($conecta, $exibe_apiario) // $resultado recebe por comando mysqli_query as variaveis $conecta e $busca_CATcaixas
+$exibe_florada= "select * from florada "; //$busca_CATcaixas recebe o código SQL
+$resultado = mysqli_query($conecta, $exibe_florada) // $resultado recebe por comando mysqli_query as variaveis $conecta e $busca_CATcaixas
 // função mysqli_query retorna um valor inteiro ou TRUE se a query for bem sucedida ou false se a consulta for considerada ilegal ou não montada coretamente
 ?>
 
@@ -47,7 +46,7 @@ $resultado = mysqli_query($conecta, $exibe_apiario) // $resultado recebe por com
             </div>
             <span class="navbar-text d-flex justify-content-center mx-auto">
                 <text
-                    style="font-family: 'Times New Roman', Times, serif; font-size: 25px; font-weight: bold; color: white;">Apiários</text>
+                    style="font-family: 'Times New Roman', Times, serif; font-size: 25px; font-weight: bold; color: white;">Floradas</text>
             </span>
 
             <div class="navbar-text d-flex justify-content-end">
@@ -113,10 +112,17 @@ $resultado = mysqli_query($conecta, $exibe_apiario) // $resultado recebe por com
             <!------------------------------- ------------------ MENU SUPERIOR ---------------------------------->
             <div class=" row " >
                 <div class="col-4" style="margin-left:-20px;" >
-                    <!--BOTÃO ADICIONAR COLMEIA--->
-                    <button type="button" class="btn btn-success btn-sm btcad" data-bs-toggle="modal" data-bs-target="#CadApiarioModal" >                    
-                        Adicionar Apiario <img src='img/add.png' width='22px' height='28px' class="img-responsive">
+                    <!--BOTÃO ADICIONAR FLORADA--->
+                    
+                    <button type="button" class="btn btn-success btn-sm btcad" data-bs-toggle="modal" data-bs-target="#CadFloradaModal" >                    
+                        Adicionar Florada <img src='img/add.png' width='22px' height='28px' class="img-responsive">
                     </button>
+
+                    <!--OPÇÃO DE SEGUNDO BOTÃO
+                    <button type="button" class="btn btn-dark btn-sm btcad" data-bs-toggle="modal" data-bs-target="#CadRevisaoModal">                         
+                        Adicionar Florada <img src='img/tarefas.png' width='22px' height='25px' class="img-responsive">
+                    </button>
+                        -->
                 </div>
                     
                 <div class="col-8" >
@@ -146,9 +152,11 @@ $resultado = mysqli_query($conecta, $exibe_apiario) // $resultado recebe por com
                     <thead class="table-dark position:sticky;   ">
                         <tr class="table-md   ">
                             <th scope="col">Identificação</th>
-                            <th scope="col">Responsável</th>
+                            <th scope="col">Nome científico</th>
+                            <th scope="col">Início da Floração</th>
+                            <th scope="col">Fim da Floração</th>
                             <th scope="col">Ações</th>
-                            <th scope="col">Mais Informações do Apiário</th>                            
+                            
                         </tr>
                     </thead>
                     <tbody>
@@ -157,59 +165,44 @@ $resultado = mysqli_query($conecta, $exibe_apiario) // $resultado recebe por com
                             while ($linha  = mysqli_fetch_array($resultado)) { ?>
                                 <!--enquanto $linha receber função mysqli_fetch_array ($resultado)-->
 
-                                <td><?php echo $linha['DESCRICAO']; ?></td>
-                                <td><?php echo $linha['RESPONSAVEL']; ?></td>
+                                <td><?php echo $linha['DESC_FLORADA']; ?></td>
+                                <td><?php echo $linha['NOME_CIENTIFICO']; ?></td>
+                                <td><?php echo $linha['INICIO_FLORACAO']; ?></td>
+                                <td><?php echo $linha['TERMINO_FLORACAO']; ?></td>
+                                
 
                                 <td>
-                                    <button type="button" data-bs-toggle="modal" class="btn btn-sm btn-link" data-bs-target="#exclusao<?php echo $linha['COD_APIARIO']; ?>">
-                                        <img src='img/excluir.png' width='22px' height='22px' alt="Excluir o Apiário?">
+                                    <button type="button" data-bs-toggle="modal" class="btn btn-sm btn-link" data-bs-target="#exclusao<?php echo $linha['COD_FLORADA']; ?>">
+                                        <img src='img/excluir.png' width='22px' height='22px' alt="Excluir a Florada?">
                                     </button>
-                                    <button type="button" data-bs-toggle="modal" class="btn btn-sm btn-link " data-bs-target="#Edicao<?php echo $linha['COD_APIARIO']; ?>">
+                                    <button type="button" data-bs-toggle="modal" class="btn btn-sm btn-link " data-bs-target="#Edicao<?php echo $linha['COD_FLORADA']; ?>">
                                         <img src='img/editar.png' width='22px' height='22px'>
                                     </button>
                                 </td>
-                                <td>
-                                    <button type="button" data-bs-toggle="modal" class="btn btn-sm btn-secondary" data-bs-target="#detalhes_AP<?php echo $linha['COD_APIARIO']; ?>">
-                                        Detalhes
-                                    </button>
-                                    <button type="button" data-bs-toggle="modal" class="btn btn-sm btn-success" data-bs-target="#colmeia_AP<?php echo $linha['COD_APIARIO']; ?>">
-                                    Colméia  
-                                    </button>
-                                    <button type="button" data-bs-toggle="modal" class="btn btn-sm btn-info" data-bs-target="#tarefas_AP<?php echo $linha['COD_APIARIO']; ?>">
-                                     Ver tarefa  
-                                    </button>
-                                    <button type="button" data-bs-toggle="modal" class="btn btn-sm btn-success" data-bs-target="#tarefas_AP<?php echo $linha['COD_APIARIO']; ?>">
-                                     Selecionar Floradas  
-                                    </button>
-                                </td>
+                                
                                 
 
                         </tr>
 
                         <!-- MODAL EXCLUSÃO-->
-                        <div class="modal" tabindex="-1" role="dialog" id="exclusao<?php echo $linha['COD_APIARIO']; ?>">
+                        <div class="modal" tabindex="-1" role="dialog" id="exclusao<?php echo $linha['COD_FLORADA']; ?>">
                             <div class="modal-dialog img-responsive" role="document">
                                 <div class="modal-content">
                                     <div class="modal-header justify-content-center bg-danger text-white ">
                                         <h5 class="modal-title">Confirmar exclusão</h5>
                                     </div>
                                     <div class="modal-body bg-light ">
-                                        <p>Excluir o apiario: <b><?php echo $linha['DESCRICAO']; ?>
+                                        <p>Excluir a florada: <b><?php echo $linha['DESC_FLORADA']; ?>
                                             </b> ? </p>
-                                        <p><b>Endereço:</b> Rua
-                                            <?php echo $linha['RUA'] . " número " . $linha['NUMERO'] . ", Bairro " . $linha['BAIRRO']; ?>
-                                            <BR>
-                                            <b>Cidade: </b><?php echo $linha['CIDADE'] ?>
-                                        </p>
-                                        <?php $id = $linha['COD_APIARIO']; ?>
+                                        
 
                                     </div>
                                     <div class="modal-footer justify-content-center img-responsive ">
-                                        <a href='apiario.php'><button type="button" class="btn btn-secondary text-center " data-dismiss="modal">
+                                        <a href='floradas.php'><button type="button" class="btn btn-secondary text-center " data-dismiss="modal">
                                                 Cancelar
                                             </button>
                                         </a>
-                                        <a href="desativa/apiario_off.php?COD_APIARIO=<?php echo $id ?>"><button type="button" class="btn btn-danger 
+                                        <a href="desativa/florada_off.php?COD_FLORADA=<?php echo $id ?>"><button type="button" class="btn btn-danger 
                                         text-center"> Confirma
                                             </button>
                                         </a>
@@ -283,281 +276,6 @@ $resultado = mysqli_query($conecta, $exibe_apiario) // $resultado recebe por com
                             </div>
                         </div>
 
-
-                        <!--MODAL MAIS DETALHES DO APIÁRIO --->
-                        <div class="modal   " id="detalhes_AP<?php echo $linha['COD_APIARIO']; ?>" tabindex="-1" aria-labelledby="#" aria-hidden="true">
-                            <div class="modal-dialog  modal-lg modal_CONS" title="">
-                                <div class="modal-content">
-
-                                    <!--inicio cabeçalho do modal-->
-                                    <div class="modal-header bg-primary text-white ">
-                                        <h5 class="modal-title  "><?php echo "Apiário: " . $linha['DESCRICAO']; ?>
-                                        </h5>
-                                        <a href="apiario.php"> <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
-                                                <span aria-hidden="true">&times;</span>
-                                            </button> </a>
-                                    </div>
-
-
-                                    <!--inicio corpo do modal-->
-                                    <div class="modal-body" style="height:380px;">
-                                        <div class="container">
-
-                                            <!--LINHA 01 MODAL-->
-                                            <div class="row ">
-                                                <div class="col md-1  ">
-                                                    <?php $img = $linha['IMAGEM'];
-                                                    echo "<img src='$img' width='150px' height='150px'> </img>" ?>
-                                                </div>
-
-                                                <div class="col-md-8">                                                                                                     
-
-                                                    <?php
-                                                    if ($linha['SITUACAO'] = 1) {
-                                                        $SITUACAO = "Ativo";
-                                                    }
-                                                    ?>
-                                                    <?php echo "<B>Situação </B>: " . $SITUACAO; ?> <br>
-                                                    <?php  $LOCAL = $linha['ENDERECO'];                                                 
-                                                    echo "<B>Localização </B>: " .$LOCAL ; ?> <br>
-                                                    
-                                                    <?php
-                                                    //MUDAR DATA PDRÃO BRASILEIRO
-                                                    $DATA = $linha['DATA_ATIVO'];
-                                                    $data_BR = implode("/", array_reverse(explode("-", $DATA)));
-                                                    ?>
-
-                                                    <?php echo "<B>Inicio do funcionamento</B>: " . $data_BR; ?><br>
-                                                    <?php echo "<B>Latitude</B>: " . $linha['LATITUDE'] . "<B>" .  "  Longitude</B>: " . $linha['LONGITUDE']; ?>
-                                                    <hr width="100%">
-                                                    <br>
-                                                    </hr>
-
-                                                </div>
-                                            </div>
-
-                                            <!--LINHA 02 MODAL-->
-                                            <div class="row" style="background-color:whitesmoke;">
-                                                <div class="col-md-3">
-
-                                                    <h5><b>Raínhas ativas</b></h5>
-
-                                                    <!--IMPRIMIR QTD DE RAINHA POR APIÁRIO-->
-                                                    <?php $cod_ap = $linha['COD_APIARIO'];
-                                                    $busca = "SELECT COUNT(DESC_RAINHA) AS cod FROM lista_colmeia8 WHERE COD_APIARIO = $cod_ap";
-                                                    $query = mysqli_query($conecta, $busca);
-                                                    // $result_col = mysqli_fetch_array($query);  Verificar com fernando
-                                                    ?>
-                                                    <img src="img/rainha.png" width="70px" style="padding-top: 15px;">
-                                                    <p style="color: blue; font-weight: bold; font-size: 60px; float: left;">
-                                                        <?php echo $result_col['cod']; ?>
-                                                    </p>
-
-                                                </div>
-
-
-
-                                                <div class="col-md-3" style="background-color:whitesmoke;">
-
-
-                                                    <h5><B>Colméias ativas</b></h5>
-
-                                                    <!--IMPRIMIR QTD DE COLMEIA POR APIÁRIO-->
-                                                    <?php $cod_ap = $linha['COD_APIARIO'];
-                                                    $busca = "SELECT COUNT(*) AS cod FROM colmeia WHERE COD_APIARIO = $cod_ap";
-                                                    $query = mysqli_query($conecta, $busca);
-                                                    $result_col = mysqli_fetch_array($query);
-                                                    ?>
-                                                    <img src="img/colmeia.png" width="70px" style="padding-top:15px;">
-                                                    <p style="color:blue;  font-weight:bold; font-size:60px; float:left; ">
-                                                        <?php echo $result_col['cod']; ?>
-                                                    </p>
-
-                                                </div>
-
-                                                <div class="col-md-3">
-
-
-                                                    <h5><B>Tarefas </b></h5>
-
-                                                    <!--IMPRIMIR QTD DE TAREFAS POR APIÁRIO-->
-                                                    <?php $cod_ap = $linha['COD_APIARIO'];
-                                                    $busca = "SELECT COUNT(*) AS cod FROM tarefa WHERE COD_APIARIO = $cod_ap";
-                                                    $query = mysqli_query($conecta, $busca);
-                                                    $result_col = mysqli_fetch_array($query);
-                                                    ?>
-                                                    <img src="img/tarefas.png" width="70px" style="padding-top:15px;">
-                                                    <p style="color:blue;  font-weight:bold; font-size:60px; float:left; ">
-                                                        <?php echo $result_col['cod']; ?>
-                                                    </p>
-
-                                                </div>
-
-                                                <div class="col-md-3" style="background-color:whitesmoke;">
-
-
-                                                    <h5><B>Produção de mel</b></h5>
-
-                                                    <!--IMPRIMIR QTD ?? POR APIÁRIO-->
-                                                    <?php $cod_ap = $linha['COD_APIARIO'];
-                                                    $busca = "SELECT SUM(QUANTIDADE) AS cod FROM producao WHERE CATEGORIA LIKE 'Mel' AND COD_APIARIO = '$cod_ap'";
-                                                    $query = mysqli_query($conecta, $busca);
-                                                    $result_col = mysqli_fetch_array($query);
-                                                    ?>
-                                                    <img src="img/mel.png" width="70px" style="padding-top:15px;">
-                                                    <p style="color:blue;  font-weight:bold; font-size:30px; float:left; padding-top:20px; ">
-
-                                                        <?php
-                                                        $res = $result_col['cod'];
-                                                        if ($result_col['cod'] < 1) {
-                                                            echo "0 Kg";
-                                                        } else {
-                                                            echo $res . " Kg";
-                                                        }
-                                                        ?>
-                                                    </p>
-
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-
-
-                        <!--MODAL LISTAR COLMEIAS POR APIÁRIO --->
-                        <div class="modal   " id="colmeia_AP<?php echo $linha['COD_APIARIO']; ?>" tabindex="-1" aria-labelledby="#" aria-hidden="true">
-                            <div class="modal-dialog   modal_CONS" title="">
-                                <div class="modal-content">
-
-                                    <!--inicio cabeçalho do modal-->
-                                    <div class="modal-header bg-primary text-white ">
-                                        <h5 class="modal-title  ">
-                                        Colméias deste apiário
-                                        </h5>
-                                        <a href="apiario.php">
-                                            <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
-                                                <span aria-hidden="true">&times;</span>
-                                            </button>
-                                        </a>
-                                    </div>
-
-
-                                    <!--inicio corpo do modal-->
-                                    <div class="modal-body" style='background-color:whitesmoke'>
-                                        <div class=" container">
-                                            <div class="row ">
-                                                <div class="col md-12 COL1 ">
-                                                    <div class="col-md-8" style='overflow-x:auto; height:300px;'>
-                                                        <?php
-                                                        //OBTER CÓDIGO DO APIÁRIO
-                                                        $cod_ap = $linha['COD_APIARIO'];
-
-                                                        //SQL DE BUSCA
-                                                        $sql_BUSCA_COLMEIA = "SELECT * FROM colmeia WHERE COD_APIARIO = '$cod_ap'";
-                                                        $BUSCA_COLMEIA = mysqli_query($conecta, $sql_BUSCA_COLMEIA);
-                                                        while ($teste = mysqli_fetch_array($BUSCA_COLMEIA)) {
-
-                                                            //ATRIBUIR VALORES DA BUSCA A VARIAVEIS
-                                                            $desc_COLMEIA     = $teste['DESC_COLMEIA'];
-
-                                                            //CONVERTER DATA PADRÃO BRASILEIRO
-                                                            $DATA = $teste['DATA_INSTALACAO'];
-                                                            $data_BR = implode("/", array_reverse(explode("-", $DATA))); 
-                                                            
-
-                                                            $desc_ESPECIE     = $teste['ESPECIE'];
-                                                            $desc_ORIGEM      = $teste['ORIGEM'];
-                                                            $desc_SITUACAO    = $teste['STATUS'];
-                                                            $desc_COD_RAINHA  = $teste['COD_RAINHA'];
-
-                                                            //IMPRIMIR VALORES DA BUSCA
-                                                            echo  "<B>Descrição da colmeia:</B> " . $desc_COLMEIA . "<BR>";
-                                                            echo  "<B>Instalação:</B> " . $data_BR . "<BR>";
-                                                            echo  "<B>Espécie do enxame:</B> " . $desc_ESPECIE . "<BR>";
-                                                            echo  "<B>Descrição da Raínha:</B> " . "<BR>";
-                                                            echo  "<B>Origem da Colméia:</B> " . $desc_ORIGEM . "<BR>";
-                                                            echo "<hr width='100%'></hr>";
-                                                        }
-                                                        ?>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-
-                        <!--MODAL LISTAR TAREFAS POR APIÁRIO --->
-                        <div class="modal   " id="tarefas_AP<?php echo $linha['COD_APIARIO']; ?>" tabindex="-1" aria-labelledby="#" aria-hidden="true">
-                            <div class="modal-dialog   modal_CONS" title="">
-                                <div class="modal-content">
-
-                                    <!--inicio cabeçalho do modal-->
-                                    <div class="modal-header bg-primary text-white ">
-                                        <h5 class="modal-title  ">
-                                            Tarefas do Apiário 
-                                        </h5>
-                                        <a href="apiario.php">
-                                            <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
-                                                <span aria-hidden="true">&times;</span>
-                                            </button>
-                                        </a>
-                                    </div>
-
-
-                                    <!--inicio corpo do modal-->
-                                    <div class="modal-body" style='background-color:whitesmoke'>
-                                        <div class=" container">
-                                            <div class="row ">
-                                                <div class="col md-12 COL1 ">
-                                                    <div clas="col-md-8" style='overflow-x:auto; height:300px;'>
-                                                        <?php
-                                                        //BUSCO A ID DO APIARIO
-                                                        $cod_ap = $linha['COD_APIARIO'];
-                                                        
-                                                        //SELECT NO BANCO
-                                                        $sql_BUSCA_TAREFA = "SELECT * FROM tarefa WHERE COD_APIARIO = '$cod_ap'";
-                                                        $BUSCA_TAREFA = mysqli_query($conecta, $sql_BUSCA_TAREFA);
-                                                        while ($teste = mysqli_fetch_array($BUSCA_TAREFA)) {
-
-                                                            //$desc_CAT_TAREFA       = $teste['CATEGORIA'];
-                                                            //echo $desc_CAT_TAREFA;
-                                                            //if ($teste < 1) {
-                                                              //  echo "<h3> Nenhum registro encontardo! </h3>";
-                                                            //} else {
-
-
-                                                                //ATRIBUIR VALORES DA BUSCA A VARIAVEIS
-                                                                $desc_CAT_TAREFA     = $teste['CATEGORIA'];
-                                                                $desc_DATA_TAREFA  = $teste['DATA_TAREFA'];
-                                                                $desc_PRIORIDADE      = $teste['PRIORIDADE'];
-                                                                $desc_OBSERVACOES      = $teste['OBSERVACOES'];
-                                                                $desc_CO      = $teste['OBSERVACOES'];
-
-
-                                                                //IMPRIMIR VALORES DA BUSCA
-                                                                echo  "<B>Tarefa:</B> " . $desc_CAT_TAREFA . "<BR>";
-                                                                echo  "<B>Data:</B> " . $desc_DATA_TAREFA . "<BR>";
-                                                                echo  "<B>Prioriade:</B> " . $desc_PRIORIDADE . "<BR>";
-                                                                echo  "<B>Observações:</B> " . $desc_OBSERVACOES . "<BR>";
-
-                                                                echo "<hr width='100%'></hr>";
-                                                            
-                                                        }
-                                                        ?>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
             </div>
         </div>
     </div>
@@ -602,68 +320,7 @@ $resultado = mysqli_query($conecta, $exibe_apiario) // $resultado recebe por com
 <!-- FIM DO CÓDIGO --------------------------------------(ITENS VISIVEIS EM 1 PLANO)--------------------------------------------->
 
 
-<!--MODAL DE CADASTRO DE APIARIO-->
-<div class="modal fade" id="CadApiarioModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog ">
-        <div class="modal-content ">
 
-            <!--CABEÇALHO-->
-            <div class="modal-header justify-content-center  bg-primary text-white ">
-                <h5 class="modal-title fs-5" id="exampleModalLabel">Cadastro de Apiário</h5>
-            </div>
-            <!--CORPO-->
-            <div class="modal-body">
-
-                <div class="col-md-12">
-                    <!--FORMULARIO-->
-                    <form class="form-group " method="post" name="cadAPIARIO" action="valida_cad/SALVARcad_APIARIO.php" enctype="multipart/form-data">
-
-                        
-
-                        <!--ITENS AGRUPADOS NA MESMA LINHA -->
-                        <div class=" form-inline mt-3">
-                            <input type="text" class=" form-control " maxlength="50" name="DESCRICAO" placeholder="Informe uma descrição para o apiário" onfocus="this.value='';" />
-                        </div>
-
-                        <label class="form-text mt-2"><b>Localização do Apiário</b></label>
-                        <div class=" form-inline mt-1">
-                            <input type="text" class=" form-control " maxlength="50" name="LOCAL" placeholder="Descreva uma localização" onfocus="this.value='';" />
-                        </div>
-                        <!--ITENS AGRUPADOS NA MESMA LINHA -->
-                        <div class="form-inline mt-2 ">
-                            <input type="number" class=" form-control mt-2 " id="latitude" maxlength="50" name="LATITUDE" placeholder="Latitude" onfocus="this.value='';" />
-                            <input type="number" class=" form-control ml-3 mt-2 " id="longitude "maxlength="50" name="LONGITUDE" placeholder="Longitude" onfocus="this.value='';" />
-                        </div>
-                        <BR>
-
-
-                        <input type="text" class="form-control  " required maxlength="30" name="RESPONSAVEL" placeholder="Informe o responsável " onfocus="this.value='';" />
-                        <input type="file" class="form-control mt-3 " accept="image/*" type="file" id="formFile" name="imagem">
-
-
-                        <input type="hidden" id="input" name="dt_inativo" />
-                        <input type="hidden" id="input" name="dt_ativo" />
-                        <input type="hidden" id="input" name="situacao" /><br>
-                        <a href="apiario.php"><button type="button" class="btn btn-secondary btn-sm ">Cancelar</button></a>
-                        <button type="submit" class="btn btn-primary btn-sm" name="enviar">Adicionar</button>
-
-                    </form>
-
-                    <script type="text/javascript">
-                        $(document).ready(function(){
-                        $('#latitude').mask('000.00000');
-                        $('#telefone').mask('(00)0000-0000');
-                        $('#cep').mask('00000-000');
-                        $('#cepPropriedade').mask('00000-000');
-                        });
-                </script>
-
-
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
 
 <!--MODAL DE CADASTRO DE FLORADA-->
 <div class="modal fade" id="CadFloradaModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -693,7 +350,7 @@ $resultado = mysqli_query($conecta, $exibe_apiario) // $resultado recebe por com
                         
                         <!------------------------------------------SELECT INICIO FLORADA------------------------------------------>
                         <label class="form-text mt-2"><b>Data de início da florada</b></label>                        
-                        <select class="form-control" name="caixa" width="auto">
+                        <select class="form-control" name="INICIO_FLORADA" width="auto">
                             <option value="Janeiro" selected> Janeiro</option>
                             <option value="Fevereiro"> Fevereiro</option>
                             <option value=" Março"> Março</option>
@@ -711,7 +368,7 @@ $resultado = mysqli_query($conecta, $exibe_apiario) // $resultado recebe por com
 
                         <!------------------------------------------SELECT FIM FLORADA------------------------------------------>
                         <label class="form-text mt-2"><b>Data de fim da florada</b></label>                        
-                        <select class="form-control" name="caixa" width="auto">
+                        <select class="form-control" name="FIM_FLORADA" width="auto">
                             <option value="Janeiro" selected> Janeiro</option>
                             <option value="Fevereiro"> Fevereiro</option>
                             <option value=" Março"> Março</option>
@@ -727,7 +384,7 @@ $resultado = mysqli_query($conecta, $exibe_apiario) // $resultado recebe por com
                             </option>
                         </select>
                         <br>
-                        <a href="apiario.php"><button type="button" class="btn btn-secondary btn-sm ">Cancelar</button></a>
+                        <a href="floradas.php"><button type="button" class="btn btn-secondary btn-sm ">Cancelar</button></a>
                         <button type="submit" class="btn btn-primary btn-sm" name="enviar">Adicionar</button>
 
                     </form>
