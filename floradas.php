@@ -56,31 +56,20 @@ $resultado = mysqli_query($conecta, $exibe_florada) // $resultado recebe por com
                 <a href="logoff.php" class="nav-link">Sair</a>
             </div>
 
-            <!--itens do botão-->
+                        <!--itens do botão-->
             <div class="navbar-collapse collapse" id="menu">
                 <ul class="navbar-nav">
-                    <li class="nav-item">
-                        <a class="nav-link" href="producao.php">Produções </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="tarefas.php">Minhas Tarefas</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="apiario.php">Apiários</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="colmeia.php">Colméias</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="rainha.php">Raínhas</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="floradas.php">Floradas</a>
-                    </li>
+                    <li class="nav-item"><a class="nav-link" href="apiario.php">Apiários</a></li>
+                    <li class="nav-item"><a class="nav-link" href="colmeia.php">Colméias</a></li>
+                    <li class="nav-item"><a class="nav-link" href="floradas.php">Floradas</a></li>
+                    <li class="nav-item"><a class="nav-link" href="tarefas.php">Minhas Tarefas</a></li>
+                    <li class="nav-item"><a class="nav-link" href="producao.php">Produções </a></li>
+                    <li class="nav-item"><a class="nav-link" href="rainha.php">Raínhas</a></li>
                 </ul>
-                <!--FINAL ITENS DO BOTÃO RESPONSIVO-->
-            </div>    
+            </div>
     </nav>
+    <!--FINAL ITENS DO BOTÃO RESPONSIVO-->
+
     <script>
         document.addEventListener('click', function (event) {
             var navbarMenu = document.getElementById('menu');
@@ -276,7 +265,7 @@ $resultado = mysqli_query($conecta, $exibe_florada) // $resultado recebe por com
                             </div>
                         </div>
 
-            </div>
+            <!-- </div> -->
         </div>
     </div>
 

@@ -68,28 +68,17 @@ $resultado = mysqli_query($conecta, $exibe_colmeia) // $resultado recebe por com
             <!--itens do botão-->
             <div class="navbar-collapse collapse" id="menu">
                 <ul class="navbar-nav">
-                    <li class="nav-item">
-                        <a class="nav-link" href="producao.php">Produções </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="tarefas.php">Minhas Tarefas</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="apiario.php">Apiários</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="colmeia.php">Colméias</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="rainha.php">Raínhas</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="floradas.php">Floradas</a>
-                    </li>
+                    <li class="nav-item"><a class="nav-link" href="apiario.php">Apiários</a></li>
+                    <li class="nav-item"><a class="nav-link" href="colmeia.php">Colméias</a></li>
+                    <li class="nav-item"><a class="nav-link" href="floradas.php">Floradas</a></li>
+                    <li class="nav-item"><a class="nav-link" href="tarefas.php">Minhas Tarefas</a></li>
+                    <li class="nav-item"><a class="nav-link" href="producao.php">Produções </a></li>
+                    <li class="nav-item"><a class="nav-link" href="rainha.php">Raínhas</a></li>
                 </ul>
-                <!--FINAL ITENS DO BOTÃO RESPONSIVO-->
             </div>
     </nav>
+    <!--FINAL ITENS DO BOTÃO RESPONSIVO-->
+
     <script>
         document.addEventListener('click', function (event) {
             var navbarMenu = document.getElementById('menu');
@@ -114,43 +103,47 @@ $resultado = mysqli_query($conecta, $exibe_colmeia) // $resultado recebe por com
 
             <!--coluna 1 linha 1 LOGOTIPO DO SISTEMA------>
             <div class="col-12  mx-auto text-center img-responsive ">
-            <div class="img" style="height:130px;">
-                <img class="log" src="img/logo2.png"   width="auto;" height="130px"; alt="img"> </img>
-            </div>
-
-            <!------------------------------- ------------------ MENU SUPERIOR ---------------------------------->
-            <div class=" row " >
-                <div class="col-4" style="margin-left:-20px;" >
-                    <!--BOTÃO ADICIONAR COLMEIA--->
-                    <button type="button" class="btn btn-success btn-sm btcad" data-bs-toggle="modal" data-bs-target="#CadApiarioModal" >                    
-                        Adicionar Produção <img src='img/add.png' width='22px' height='28px' class="img-responsive">
-                    </button>
+                <div class="img" style="height:130px;">
+                    <img class="log" src="img/logo2.png" width="auto;" height="130px" ; alt="img"> </img>
                 </div>
-                    
-                <div class="col-8" >
-                    <!-- Funçoes de adicionar e buscar -->
-                    <form class="d-flex img-responsive dt-responsive ml-0" action="" method="get">                    
 
-                        <!--Pesquisar---> 
-                        <button type="submit" class="btn btn-primary " data-bs-target="#pesquisa" style="width:120px; height:38px;" > Buscar 
-                            <img src='img/lupa.png' width='20px' height='20px' class="img-responsive" >
+                <!------------------------------- ------------------ MENU SUPERIOR ---------------------------------->
+                <div class=" row ">
+                    <div class="col-4" style="margin-left:-20px;">
+                        <!--BOTÃO ADICIONAR COLMEIA--->
+                        <button type="button" class="btn btn-success btn-sm btcad" data-bs-toggle="modal"
+                            data-bs-target="#CadApiarioModal">
+                            Adicionar Produção <img src='img/add.png' width='22px' height='28px' class="img-responsive">
                         </button>
-                        <input class="form-control" name="pesquisar" type="text" style="width: 100%; background: rgba(255, 255, 255, 0.3);"  />
-                    </form>
-                </div>                
-                    
+                    </div>
+
+                    <div class="col-8">
+                        <!-- Funçoes de adicionar e buscar -->
+                        <form class="d-flex img-responsive dt-responsive ml-0" action="" method="get">
+
+                            <!--Pesquisar--->
+                            <button type="submit" class="btn btn-primary " data-bs-target="#pesquisa"
+                                style="width:120px; height:38px;"> Buscar
+                                <img src='img/lupa.png' width='20px' height='20px' class="img-responsive">
+                            </button>
+                            <input class="form-control" name="pesquisar" type="text"
+                                style="width: 100%; background: rgba(255, 255, 255, 0.3);" />
+                        </form>
+                    </div>
+
+                </div>
+
             </div>
-
+            <!--final da linha 01--->
         </div>
-                <!--final da linha 01--->
-    </div>
 
 
-    <!--CONTAINER TABELA DE DADOS-->
-    <div class="container overflow-auto " style="max-height: 300px; min-height:300px; margin-top:5px; background: rgba(255, 255, 255, 0.4); border-radius: 20px;">
-        <div class="row linhaTAB  dt-responsive table-responsive overflow-auto" >
-            <!-- <div class="col table-responsive" > -->
-                <table class=" table  overflow-auto"  style="width:100%; " >
+        <!--CONTAINER TABELA DE DADOS-->
+        <div class="container overflow-auto "
+            style="max-height: 300px; min-height:300px; margin-top:5px; background: rgba(255, 255, 255, 0.4); border-radius: 20px;">
+            <div class="row linhaTAB  dt-responsive table-responsive overflow-auto">
+                <!-- <div class="col table-responsive" > -->
+                <table class=" table  overflow-auto" style="width:100%; ">
                     <thead class="table-dark position:sticky;   ">
                         <tr class="table-md   ">
                             <th scope="col">Descrição</th>
@@ -189,24 +182,27 @@ $resultado = mysqli_query($conecta, $exibe_colmeia) // $resultado recebe por com
                                 <td>
                                     <?php echo $data_BR; ?>
                                 </td>
-                                <td><?php 
-                                if ($linha['CATEGORIA']== "Mel"){
-                                    echo $linha['QUANTIDADE']." KG";}
-                                else if ($linha['CATEGORIA']== "Própolis"){
-                                    echo $linha['QUANTIDADE']." KG";}
-                                else if ($linha['CATEGORIA']== "Cera"){
-                                    echo $linha['QUANTIDADE']." KG";}
-                                else if ($linha['CATEGORIA']== "Pólen"){
-                                    echo $linha['QUANTIDADE']." KG";}
-                                else if ($linha['CATEGORIA']== "Geléia Real"){
-                                    echo $linha['QUANTIDADE']." KG";}
-                                else if ($linha['CATEGORIA']== "Apitoxina"){
-                                    echo $linha['QUANTIDADE']." MG";}
-                                else if ($linha['CATEGORIA']== "Melato"){
-                                    echo $linha['QUANTIDADE']." KG";}
-                                else if ($linha['CATEGORIA']== "Hidromel"){
-                                    echo $linha['QUANTIDADE']." L";}
-                                     ?></td>
+                                <td>
+                                    <?php
+                                    if ($linha['CATEGORIA'] == "Mel") {
+                                        echo $linha['QUANTIDADE'] . " KG";
+                                    } else if ($linha['CATEGORIA'] == "Própolis") {
+                                        echo $linha['QUANTIDADE'] . " KG";
+                                    } else if ($linha['CATEGORIA'] == "Cera") {
+                                        echo $linha['QUANTIDADE'] . " KG";
+                                    } else if ($linha['CATEGORIA'] == "Pólen") {
+                                        echo $linha['QUANTIDADE'] . " KG";
+                                    } else if ($linha['CATEGORIA'] == "Geléia Real") {
+                                        echo $linha['QUANTIDADE'] . " KG";
+                                    } else if ($linha['CATEGORIA'] == "Apitoxina") {
+                                        echo $linha['QUANTIDADE'] . " MG";
+                                    } else if ($linha['CATEGORIA'] == "Melato") {
+                                        echo $linha['QUANTIDADE'] . " KG";
+                                    } else if ($linha['CATEGORIA'] == "Hidromel") {
+                                        echo $linha['QUANTIDADE'] . " L";
+                                    }
+                                    ?>
+                                </td>
                                 <td>
                                     <?php echo $linha['colmeia']; ?>
                                 </td>
@@ -547,7 +543,7 @@ $resultado = mysqli_query($conecta, $exibe_colmeia) // $resultado recebe por com
                                     </div>
                                 </div>
                             </div>
-                </div>
+                <!-- </div> -->
             </div>
         </div>
 

@@ -57,28 +57,17 @@
             <!--itens do botão-->
             <div class="navbar-collapse collapse" id="menu">
                 <ul class="navbar-nav">
-                    <li class="nav-item">
-                        <a class="nav-link" href="producao.php">Produções </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="tarefas.php">Minhas Tarefas</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="apiario.php">Apiários</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="colmeia.php">Colméias</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="rainha.php">Raínhas</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="floradas.php">Floradas</a>
-                    </li>
+                    <li class="nav-item"><a class="nav-link" href="apiario.php">Apiários</a></li>
+                    <li class="nav-item"><a class="nav-link" href="colmeia.php">Colméias</a></li>
+                    <li class="nav-item"><a class="nav-link" href="floradas.php">Floradas</a></li>
+                    <li class="nav-item"><a class="nav-link" href="tarefas.php">Minhas Tarefas</a></li>
+                    <li class="nav-item"><a class="nav-link" href="producao.php">Produções </a></li>
+                    <li class="nav-item"><a class="nav-link" href="rainha.php">Raínhas</a></li>
                 </ul>
-                <!--FINAL ITENS DO BOTÃO RESPONSIVO-->
             </div>
     </nav>
+    <!--FINAL ITENS DO BOTÃO RESPONSIVO-->
+
     <script>
         document.addEventListener('click', function (event) {
             var navbarMenu = document.getElementById('menu');
@@ -95,8 +84,9 @@
     </script>
 
 
-    
-    <div class="container CONT img-responsive mx-auto align-items-center" style='max-height:180px; border:0px solid red;'>
+
+    <div class="container CONT img-responsive mx-auto align-items-center"
+        style='max-height:180px; border:0px solid red;'>
 
         <!--linha 01-->
         <div class="row img-responsive mx-auto align-items-center pt-2 ">
@@ -112,7 +102,7 @@
         </div>
     </div>
 
-   <!-- container que contém todo o conteudo-->
+    <!-- container que contém todo o conteudo-->
     <div class="container" style=" background: rgba(255, 255, 255, 0.3); border-radius: 20px;">
 
 
@@ -301,7 +291,8 @@
                                 ?>
 
                             <!--CONTAINER TABELA DE DADOS-->
-                            <div class="container ct-tabela overflow-auto " style="max-height:210px; width:580px; margin-top: -40px; margin-left:-30px; border-radius:15px; border:0px solid red;">
+                            <div class="container ct-tabela overflow-auto "
+                                style="max-height:210px; width:580px; margin-top: -40px; margin-left:-30px; border-radius:15px; border:0px solid red;">
                                 <div class="row linhaTAB dt-responsive table-responsive">
                                     <div class="col table-responsive" style="border: 0px solid green;">
                                         <table class="table table-striped table-rounded">
@@ -337,7 +328,7 @@
                     </div>
                 </div>
             </div>
-            
+
             <!---CONTAINER ITENS DO RODAPE--->
             <div class="row fixed-bottom" style="min-height: 60px; max-height:60px; background: rgba(0, 0, 0, 0.5);">
                 <div class="container-fluid">
@@ -368,4 +359,5 @@
         </div>
     </div>
 </body>
+
 </html>
